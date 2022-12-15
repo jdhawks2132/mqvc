@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_15_192017) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_15_192920) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -106,7 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_192017) do
   create_table "vendor_contributions", force: :cascade do |t|
     t.integer "vendor_id", null: false
     t.integer "contribution_id", null: false
-    t.integer "user_id", null: false
     t.string "year"
     t.text "notes"
     t.datetime "created_at", null: false
@@ -114,7 +113,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_192017) do
     t.string "status"
     t.string "asset_link"
     t.index ["contribution_id"], name: "index_vendor_contributions_on_contribution_id"
-    t.index ["user_id"], name: "index_vendor_contributions_on_user_id"
     t.index ["vendor_id"], name: "index_vendor_contributions_on_vendor_id"
   end
 
@@ -154,7 +152,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_192017) do
   add_foreign_key "vendor_contacts", "contacts"
   add_foreign_key "vendor_contacts", "vendors"
   add_foreign_key "vendor_contributions", "contributions"
-  add_foreign_key "vendor_contributions", "users"
   add_foreign_key "vendor_contributions", "vendors"
   add_foreign_key "vendor_resitrations", "registrations"
   add_foreign_key "vendor_resitrations", "vendors"
