@@ -10,4 +10,11 @@ Rails.application.routes.draw do
              }
 
   get '/administrator_details', to: 'administrators#index'
+
+  namespace :api do
+    namespace :v1 do
+      resources :contacts
+      resources :vendors
+    end
+  end
 end
