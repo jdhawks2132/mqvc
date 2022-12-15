@@ -98,6 +98,7 @@ GEM
     erubi (1.11.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    htmlbeautifier (1.4.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -195,6 +196,7 @@ DEPENDENCIES
   debug
   devise (~> 4.8)
   devise-jwt (~> 0.10.0)
+  htmlbeautifier
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4)
