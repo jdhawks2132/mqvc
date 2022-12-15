@@ -10,12 +10,28 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: self
 
-  def jwt_payload
-    super
-  end
-
   has_many :vendor_assignments, dependent: :destroy
   has_many :vendors, through: :vendor_assignments
   has_one :user_role, dependent: :destroy
   has_one :role, through: :user_role
+
+  def jwt_payload
+    super
+  end
+
+  def admin?
+    role.level == 3
+  end
+
+  def read_only_admin?
+    role.level = 2
+  end
+
+  def vendor?
+    role.level == 1
+  end
+
+  def guest?
+    role.level == 0
+  end
 end
