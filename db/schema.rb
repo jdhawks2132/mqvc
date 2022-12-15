@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_15_184938) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_15_190747) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -63,6 +63,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_184938) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "registrations", force: :cascade do |t|
+    t.integer "badges"
+    t.integer "tables"
+    t.string "badge_names"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -95,9 +103,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_184938) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
+    t.string "asset_link"
     t.index ["contribution_id"], name: "index_vendor_contributions_on_contribution_id"
     t.index ["user_id"], name: "index_vendor_contributions_on_user_id"
     t.index ["vendor_id"], name: "index_vendor_contributions_on_vendor_id"
+  end
+
+  create_table "vendor_resitrations", force: :cascade do |t|
+    t.integer "vendor_id", null: false
+    t.integer "registration_id", null: false
+    t.date "year"
+    t.text "notes"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["registration_id"], name: "index_vendor_resitrations_on_registration_id"
+    t.index ["vendor_id"], name: "index_vendor_resitrations_on_vendor_id"
   end
 
   create_table "vendors", force: :cascade do |t|
@@ -124,4 +145,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_184938) do
   add_foreign_key "vendor_contributions", "contributions"
   add_foreign_key "vendor_contributions", "users"
   add_foreign_key "vendor_contributions", "vendors"
+  add_foreign_key "vendor_resitrations", "registrations"
+  add_foreign_key "vendor_resitrations", "vendors"
 end
