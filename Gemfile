@@ -51,3 +51,5 @@ end
 gem "devise", "~> 4.8"
 
 gem "devise-jwt", "~> 0.10.0"
+
+gem "faker", "~> 3.0"

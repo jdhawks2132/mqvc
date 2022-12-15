@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_15_195917) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_15_233745) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,8 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_195917) do
   end
 
   create_table "contributions", force: :cascade do |t|
-    t.string "type"
-    t.decimal "amount"
+    t.string "contribution_type"
+    t.float "amount"
     t.string "name"
     t.string "dimensions"
     t.datetime "created_at", null: false
@@ -66,9 +66,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_195917) do
   create_table "registrations", force: :cascade do |t|
     t.integer "badges"
     t.integer "tables"
-    t.string "badge_names"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "registration_type"
+    t.float "registration_price"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -133,7 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_195917) do
     t.index ["vendor_id"], name: "index_vendor_contributions_on_vendor_id"
   end
 
-  create_table "vendor_resitrations", force: :cascade do |t|
+  create_table "vendor_registrations", force: :cascade do |t|
     t.integer "vendor_id", null: false
     t.integer "registration_id", null: false
     t.date "year"
@@ -141,13 +143,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_195917) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["registration_id"], name: "index_vendor_resitrations_on_registration_id"
-    t.index ["vendor_id"], name: "index_vendor_resitrations_on_vendor_id"
+    t.text "badge_names"
+    t.index ["registration_id"], name: "index_vendor_registrations_on_registration_id"
+    t.index ["vendor_id"], name: "index_vendor_registrations_on_vendor_id"
   end
 
   create_table "vendors", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.string "vendor_type"
     t.string "status"
     t.string "general_email"
     t.string "website"
@@ -160,6 +163,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_195917) do
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -173,6 +177,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_195917) do
   add_foreign_key "vendor_contacts", "vendors"
   add_foreign_key "vendor_contributions", "contributions"
   add_foreign_key "vendor_contributions", "vendors"
-  add_foreign_key "vendor_resitrations", "registrations"
-  add_foreign_key "vendor_resitrations", "vendors"
+  add_foreign_key "vendor_registrations", "registrations"
+  add_foreign_key "vendor_registrations", "vendors"
 end

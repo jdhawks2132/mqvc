@@ -13,14 +13,5 @@ class Vendor < ApplicationRecord
 
   # vendor validations
 
-  validates :name, presence:, uniqueness: true
-  validates :email,
-            presence: true,
-            uniqueness: true,
-            format: /\w+@\w+\.{1}[a-zA-Z]{2,}/
-  validates :phone,
-            presence: true,
-            uniqueness: true,
-            format: /\d{3}-\d{3}-\d{4}/
-
+  validates :name, presence: true, uniqueness: true
 end
