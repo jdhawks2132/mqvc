@@ -13,4 +13,7 @@ class User < ApplicationRecord
   def jwt_payload
     super
   end
+
+  has_many :vendor_assignments, dependent: :destroy
+  has_many :vendors, through: :vendor_assignments
 end
