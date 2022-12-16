@@ -9,12 +9,13 @@ Rails.application.routes.draw do
                sessions: 'users/sessions',
              }
 
-  get '/administrator_details', to: 'administrators#index'
+  get '/hello', to: 'application#hello'
 
   namespace :api do
     namespace :v1 do
       resources :contacts
       resources :vendors
+      get '/me', to: 'members#me'
     end
   end
 end

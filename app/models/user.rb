@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def read_only_admin?
-    role.level = 2
+    role.level == 2
   end
 
   def vendor?
