@@ -10,6 +10,7 @@ VendorRegistration.destroy_all
 VendorContribution.destroy_all
 VendorContact.destroy_all
 VendorAssignment.destroy_all
+UserRole.destroy_all
 Contact.destroy_all
 Vendor.destroy_all
 Role.destroy_all

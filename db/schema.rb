@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_12_16_152532) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -80,9 +83,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_152532) do
   end
 
   create_table "user_roles", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "role_id", null: false
-    t.integer "vendor_id"
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.bigint "vendor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["role_id"], name: "index_user_roles_on_role_id"
@@ -105,8 +108,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_152532) do
   end
 
   create_table "vendor_assignments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "vendor_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "vendor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_vendor_assignments_on_user_id"
@@ -114,8 +117,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_152532) do
   end
 
   create_table "vendor_contacts", force: :cascade do |t|
-    t.integer "vendor_id", null: false
-    t.integer "contact_id", null: false
+    t.bigint "vendor_id", null: false
+    t.bigint "contact_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["contact_id"], name: "index_vendor_contacts_on_contact_id"
@@ -123,8 +126,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_152532) do
   end
 
   create_table "vendor_contributions", force: :cascade do |t|
-    t.integer "vendor_id", null: false
-    t.integer "contribution_id", null: false
+    t.bigint "vendor_id", null: false
+    t.bigint "contribution_id", null: false
     t.string "year"
     t.text "notes"
     t.datetime "created_at", null: false
@@ -136,8 +139,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_152532) do
   end
 
   create_table "vendor_registrations", force: :cascade do |t|
-    t.integer "vendor_id", null: false
-    t.integer "registration_id", null: false
+    t.bigint "vendor_id", null: false
+    t.bigint "registration_id", null: false
     t.date "year"
     t.text "notes"
     t.string "status"

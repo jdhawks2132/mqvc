@@ -46,6 +46,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_model_serializers (0.10.13)
+      actionpack (>= 4.1, < 7.1)
+      activemodel (>= 4.1, < 7.1)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (7.0.4)
       activesupport (= 7.0.4)
       globalid (>= 0.3.6)
@@ -70,6 +75,8 @@ GEM
     bootsnap (1.15.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    case_transform (0.2)
+      activesupport
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     date (3.3.1)
@@ -110,6 +117,7 @@ GEM
     io-console (0.5.11)
     irb (1.6.1)
       reline (>= 0.3.0)
+    jsonapi-renderer (0.2.2)
     jwt (2.5.0)
     loofah (2.19.1)
       crass (~> 1.0.2)
@@ -137,7 +145,10 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.10-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.10-x86_64-linux)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
+    pg (1.4.5)
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.1)
@@ -181,6 +192,7 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     sqlite3 (1.5.4-x86_64-darwin)
+    sqlite3 (1.5.4-x86_64-linux)
     thor (1.2.1)
     timeout (0.3.1)
     tzinfo (2.0.5)
@@ -199,8 +211,10 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
+  active_model_serializers (~> 0.10.13)
   bootsnap
   debug
   devise (~> 4.8)
@@ -208,6 +222,7 @@ DEPENDENCIES
   faker (~> 3.0)
   htmlbeautifier
   image_processing (~> 1.2)
+  pg (~> 1.4)
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4)

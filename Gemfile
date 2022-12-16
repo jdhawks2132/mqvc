@@ -7,7 +7,7 @@ ruby "3.0.3"
 gem "rails", "~> 7.0.4"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -53,3 +53,7 @@ gem "devise", "~> 4.8"
 gem "devise-jwt", "~> 0.10.0"
 
 gem "faker", "~> 3.0"
+
+gem "active_model_serializers", "~> 0.10.13"
+
+gem "pg", "~> 1.4"
