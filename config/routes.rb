@@ -10,12 +10,11 @@ Rails.application.routes.draw do
              }
 
   get '/hello', to: 'application#hello'
-
+  get '/me', to: 'members#me'
   namespace :api do
     namespace :v1 do
       resources :contacts
       resources :vendors
-      get '/me', to: 'members#me'
     end
   end
 end
