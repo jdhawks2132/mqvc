@@ -34,4 +34,8 @@ class User < ApplicationRecord
   def guest?
     role.level == 0
   end
+
+  def attached_to_vendor(vendor_id)
+    user_role.vendor_id.present? && user_role.vendor_id == vendor_id
+  end
 end
