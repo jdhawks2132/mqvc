@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useSignInMutation } from '../../store/mqvcAPI';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const [signIn, { loading, error }] = useSignInMutation();
+	const [signIn, { error }] = useSignInMutation();
+
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -14,7 +17,7 @@ const Login = () => {
 			await signIn({ email, password });
 			setEmail('');
 			setPassword('');
-			return;
+			navigate('/dashboard');
 		}
 		alert('Username or password is empty');
 		return;
@@ -49,6 +52,7 @@ const Login = () => {
 							/>
 						</div>
 						<button className='btn btn-primary'>Submit</button>
+						{error && <p className='alert alert-danger'>{error}</p>}
 					</form>
 				</div>
 			</div>
