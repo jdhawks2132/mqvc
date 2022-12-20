@@ -8,8 +8,8 @@ class Vendor < ApplicationRecord
   has_many :vendor_registrations, dependent: :destroy
   has_many :registrations, through: :vendor_registrations
 
-  has_many :vendor_assignment, dependent: :destroy
-  has_many :users, through: :vendor_assignment
+  has_many :vendor_assignments, dependent: :destroy
+  has_many :users, through: :vendor_assignments
 
   # vendor validations
 

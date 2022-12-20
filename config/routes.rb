@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :contacts
       resources :vendors
+      resources :users, only: [:index]
+      get '/vendors_by_assignment', to: 'vendors#vendors_by_assignment'
     end
   end
 end

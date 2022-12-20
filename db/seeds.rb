@@ -19,11 +19,24 @@ require 'csv'
 
 puts 'Creating vendors...'
 
+vendor_status_opts = %w[
+  Active
+  Inactive
+  Pending
+  Rejected
+  Prospect
+  Suspended
+  Terminated
+  Unknown
+  Other
+]
+
 # use faker to create 10 vendors
 10.times do |i|
   Vendor.create!(
     name: Faker::Company.name,
     vendor_type: Faker::Company.industry,
+    status: vendor_status_opts.sample,
     website: Faker::Internet.url,
     phone: Faker::PhoneNumber.cell_phone,
     general_email: Faker::Internet.email,
@@ -142,19 +155,22 @@ end
 
 puts 'Creating vendor assignments...'
 
-10.times do |i|
-  VendorAssignment.create!(
-    vendor_id: Vendor.all.sample.id,
-    user_id: User.all.sample.id,
-  )
+# for each vendor, assign them to user with the id of 1
+Vendor.all.each do |vendor|
+  VendorAssignment.create!(vendor_id: vendor.id, user_id: 1)
 end
 
 puts 'Creating vendor contributions...'
+
+contribution_status_options = %w[Pending Paid Refunded]
 
 10.times do |i|
   VendorContribution.create!(
     vendor_id: Vendor.all.sample.id,
     contribution_id: Contribution.all.sample.id,
+    year: Date.today,
+    status: contribution_status_options.sample,
+    notes: Faker::Lorem.paragraph,
   )
 end
 
@@ -164,17 +180,25 @@ puts 'Creating vendor registrations...'
   VendorRegistration.create!(
     vendor_id: Vendor.all.sample.id,
     registration_id: Registration.all.sample.id,
+    year: Date.today,
+    status: contribution_status_options.sample,
+    notes: Faker::Lorem.paragraph,
   )
 end
 
 puts 'Creating roles...'
 
-Role.create!(level: 0)
+Role.create!(id: 1, level: 0)
 
-Role.create!(level: 1)
+Role.create!(id: 2, level: 1)
 
-Role.create!(level: 2)
+Role.create!(id: 3, level: 2)
 
-Role.create!(level: 3)
+Role.create!(id: 4, level: 3)
+
+puts 'Creating user roles...'
+
+UserRole.create!(user_id: 1, role_id: 4)
+UserRole.create!(user_id: 2, role_id: 3)
 
 puts 'Done!'
