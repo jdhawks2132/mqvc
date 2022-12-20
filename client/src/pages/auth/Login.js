@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
-import { useSignInMutation } from '../../store/mqvcAPI';
+
+import axios from 'axios';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const [signIn, { error }] = useSignInMutation();
-
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-
-		const { data } = await signIn({ email, password });
-
-		if (data) {
-			window.location.href = '/';
-		}
+		// use axios to sign in and save the jwt to local storage from the headers of the response
+		axios
+			.post('users/sign_in', { user: { email, password } })
+			.then((response) => {
+				localStorage.setItem('jwt', response.headers.authorization);
+			})
+			.catch((error) => {
+				console.log('login error', error);
+			})
+			.finally(() => {
+				window.location.reload();
+			});
 	};
 
 	return (
@@ -46,7 +51,6 @@ const Login = () => {
 							/>
 						</div>
 						<button className='btn btn-primary'>Submit</button>
-						{error && <p className='alert alert-danger'>{error}</p>}
 					</form>
 				</div>
 			</div>

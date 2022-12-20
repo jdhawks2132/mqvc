@@ -31,7 +31,7 @@ export const mqvcAPI = createApi({
 				method: 'DELETE',
 				body: {},
 				credentials: 'include',
-				headers: { Authorization: 'Bearer ' + localStorage.getItem('jwt') },
+				headers: { Authorization: localStorage.getItem('jwt') },
 			}),
 			invalidateTags: ['user'],
 		}),

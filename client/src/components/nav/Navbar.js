@@ -6,7 +6,14 @@ const Navbar = ({ currentUser }) => {
 	const [signOut] = useSignOutMutation();
 
 	const handleSignOut = () => {
-		signOut();
+		signOut()
+			.then(() => {
+				localStorage.removeItem('jwt');
+				window.location.href = '/';
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 	return (
 		<nav className='flex items-center justify-between flex-wrap bg-gray-800 p-6'>
