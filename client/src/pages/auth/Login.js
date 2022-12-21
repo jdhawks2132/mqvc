@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -23,37 +24,51 @@ const Login = () => {
 	};
 
 	return (
-		<div className='container'>
-			<div className='row'>
-				<div className='col-md-12'>
-					<h2>Login</h2>
-					<form onSubmit={handleSubmit}>
-						<div className='form-group'>
-							<label htmlFor='email'>email</label>
-							<input
-								type='text'
-								className='form-control'
-								id='email'
-								placeholder='email'
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								required
-							/>
-							<label htmlFor='password'>Password</label>
-							<input
-								type='password'
-								className='form-control'
-								id='password'
-								placeholder='Password'
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								required
-							/>
-						</div>
-						<button className='btn btn-primary'>Submit</button>
-					</form>
+		<div className='container mx-auto'>
+			<form onSubmit={handleSubmit} className='w-1/5 m-11 mx-auto'>
+				<h2 className='text-2xl my-11'>Log In:</h2>
+				<div className='form-group'>
+					<label
+						htmlFor='email'
+						className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+					>
+						email
+					</label>
+					<input
+						className='appearance-none block w-full bg-gray-100 text-gray-800 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+						type='text'
+						id='email'
+						placeholder='email'
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						required
+					/>
+					<label
+						htmlFor='password'
+						className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+					>
+						Password
+					</label>
+					<input
+						type='password'
+						className='appearance-none block w-full bg-gray-100 text-gray-800 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+						id='password'
+						placeholder='Password'
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						required
+					/>
 				</div>
-			</div>
+				<button className='bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded'>
+					Submit
+				</button>
+				<p className='my-2'>
+					<Link to='/signup' className=''>
+						No account?{' '}
+						<span className='text-blue-500 font-bold'>Sign up here</span>
+					</Link>
+				</p>
+			</form>
 		</div>
 	);
 };

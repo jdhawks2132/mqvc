@@ -6,7 +6,7 @@ class MembersController < ApplicationController
 
   def show
     user = get_user_from_token
-    render json: { message: 'You are logged in', user: user }
+    render json: user, status: :ok, serializer: UserSerializer
   end
 
   private

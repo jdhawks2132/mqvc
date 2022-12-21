@@ -13,23 +13,23 @@ const DashboardReadOnly = ({ vendor }) => {
 	} = vendor;
 	return (
 		<tr>
-			<td className='border px-4 py-2'>{name}</td>
-			<td className='border px-4 py-2'>{vendor_type}</td>
-			<td className='border px-4 py-2'>
+			<td className='border px-2 py-1 text-xs'>{name}</td>
+			<td className='border px-2 py-1 text-xs'>{vendor_type}</td>
+			<td className='border px-2 py-1 text-xs'>
 				{primary_contact ? primary_contact.email : general_email}
 			</td>
-			<td className='border px-4 py-2'>{phone}</td>
-			<td className='border px-4 py-2'>{status}</td>
-			<td className='border px-4 py-2'>
+			<td className='border px-2 py-1 text-xs'>{phone}</td>
+			<td className='border px-2 py-1 text-xs'>{status}</td>
+			<td className='border px-2 py-1 text-xs'>
 				{primary_contact ? primary_contact.first_name : 'No Primary Set'}
 			</td>
-			<td className='border px-4 py-2'>
+			<td className='border px-2 py-1 text-xs '>
 				{users ? users[0].first_name : 'No Assigned To Set'}
 			</td>
-			<td className='border px-4 py-2'>
+			<td className='border px-2 py-1 text-xs'>
 				<Link to={`/vendors/${vendor.id}`}>
-					<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-						View Detail
+					<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded'>
+						View
 					</button>
 				</Link>
 			</td>

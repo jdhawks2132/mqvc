@@ -6,7 +6,12 @@ export const mqvcAPI = createApi({
 	tagTypes: ['user', 'vendor', 'contact'],
 	endpoints: (builder) => ({
 		currentUser: builder.query({
-			query: () => 'me',
+			query: () => ({
+				url: 'member-data',
+				method: 'GET',
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
 			providesTags: ['user'],
 		}),
 		vendors: builder.query({
@@ -16,14 +21,6 @@ export const mqvcAPI = createApi({
 		vendor: builder.query({
 			query: (id) => `api/v1/vendors/${id}`,
 			providesTags: ['vendor'],
-		}),
-		signIn: builder.mutation({
-			query: (user) => ({
-				url: 'users/sign_in',
-				method: 'POST',
-				body: { user },
-			}),
-			invalidateTags: ['user'],
 		}),
 		signOut: builder.mutation({
 			query: () => ({
@@ -42,6 +39,5 @@ export const {
 	useCurrentUserQuery,
 	useVendorsQuery,
 	useVendorQuery,
-	useSignInMutation,
 	useSignOutMutation,
 } = mqvcAPI;

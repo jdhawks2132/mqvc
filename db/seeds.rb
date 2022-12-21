@@ -19,46 +19,37 @@ require 'csv'
 
 puts 'Creating vendors...'
 
-vendor_status_opts = %w[
-  Active
-  Inactive
-  Pending
-  Rejected
-  Prospect
-  Suspended
-  Terminated
-  Unknown
-  Other
-]
+vendor_status_opts = %w[Active Contacted Confirmed Paid Inactive]
+vendor_type_opts = %w[Collegiate Festival Manufacturer Distributor Retailer]
 
 # use faker to create 10 vendors
-10.times do |i|
+15.times do |i|
   Vendor.create!(
     name: Faker::Company.name,
-    vendor_type: Faker::Company.industry,
+    vendor_type: vendor_type_opts.sample,
     status: vendor_status_opts.sample,
     website: Faker::Internet.url,
     phone: Faker::PhoneNumber.cell_phone,
     general_email: Faker::Internet.email,
     street_address: Faker::Address.street_address,
     city: Faker::Address.city,
-    state: Faker::Address.state,
+    state: Faker::Address.state_abbr,
     zip: Faker::Address.zip_code,
-    country: Faker::Address.country,
+    country: 'USA',
     notes: Faker::Lorem.paragraph,
-    previous_participant: Faker::Boolean.boolean,
+    previous_participant: [true, false].sample,
   )
 end
 
 puts 'Creating contacts...'
 
-10.times do |i|
+15.times do |i|
   Contact.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     street_address: Faker::Address.street_address,
     city: Faker::Address.city,
-    state: Faker::Address.state,
+    state: Faker::Address.state_abbr,
     phone: Faker::PhoneNumber.cell_phone,
     title: Faker::Job.title,
     organization: Faker::Company.name,
@@ -157,7 +148,7 @@ puts 'Creating vendor assignments...'
 
 # for each vendor, assign them to user with the id of 1
 Vendor.all.each do |vendor|
-  VendorAssignment.create!(vendor_id: vendor.id, user_id: 1)
+  VendorAssignment.create!(vendor_id: vendor.id, user_id: [1, 2].sample)
 end
 
 puts 'Creating vendor contributions...'

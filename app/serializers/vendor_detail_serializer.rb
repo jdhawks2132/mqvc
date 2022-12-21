@@ -7,6 +7,7 @@ class VendorDetailSerializer < ActiveModel::Serializer
              :phone,
              :street_address,
              :city,
+             :state,
              :zip,
              :country,
              :previous_participant,
