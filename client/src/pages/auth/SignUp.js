@@ -100,12 +100,13 @@ const SignUp = () => {
 					</label>
 					<input
 						type='password'
-						className='appearance-none block w-full bg-gray-100 text-gray-800 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+						className='appearance-none block w-full bg-gray-100 text-gray-800 border  rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
 						name='password'
 						value={formState.password}
 						onChange={handleChange}
 						required
 					/>
+					<p className='text-xs text-gray-500 mb-3'>6 characters or more</p>
 				</div>
 				{error && (
 					<p className='text-red-500 bg-red-100 py-3 px-3 my-2 rounded'>
