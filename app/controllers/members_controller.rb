@@ -1,4 +1,5 @@
 class MembersController < ApplicationController
+  before_action :authenticate_user!, only: [:admin_users]
   def me
     @User = User.find(current_user.id)
     render json: @User, status: :ok, serializer: UserSerializer
@@ -7,6 +8,12 @@ class MembersController < ApplicationController
   def show
     user = get_user_from_token
     render json: user, status: :ok, serializer: UserSerializer
+  end
+
+  def admin_users
+    @Users = User.all
+    admin_users = @Users.select { |user| user.admin? || user.read_only_admin? }
+    render json: admin_users, status: :ok, each_serializer: UserSerializer
   end
 
   private

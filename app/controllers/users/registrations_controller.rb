@@ -25,4 +25,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
              },
              status: :unprocessable_entity
   end
+
+  def sign_up_params
+    params.require(:user).permit(:email, :password, :first_name, :last_name)
+  end
 end

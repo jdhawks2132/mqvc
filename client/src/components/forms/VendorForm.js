@@ -15,6 +15,7 @@ const VendorForm = ({ vendor }) => {
 		phone: vendor?.phone || '',
 		street_address: vendor?.street_address || '',
 		city: vendor?.city || '',
+		state: vendor?.state || '',
 		zip: vendor?.zip || '',
 		country: vendor?.country || '',
 		previous_participant: vendor?.previous_participant || '',
@@ -208,6 +209,9 @@ const VendorForm = ({ vendor }) => {
 								className='appearance-none block w-full bg-gray-100 text-gray-800 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
 								id='grid-state'
 								name='state'
+								value={formState.state}
+								onChange={handleChange}
+								disabled={isDisabled}
 							>
 								{states.map((state, index) => (
 									<option key={state.label} value={state.value}>

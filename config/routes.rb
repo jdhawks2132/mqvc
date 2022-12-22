@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/hello', to: 'application#hello'
   get '/me', to: 'members#me'
   get 'member-data', to: 'members#show'
+  get '/admin-users', to: 'members#admin_users'
   namespace :api do
     namespace :v1 do
       resources :contacts
