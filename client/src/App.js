@@ -5,6 +5,7 @@ import Navbar from './components/nav/Navbar';
 import Sidebar from './components/nav/Sidebar';
 
 import Login from './pages/auth/Login';
+import SignUp from './pages/auth/SignUp';
 import Dashboard from './pages/dashboard/Dashboard';
 import VendorDetails from './pages/details/VendorDetails';
 import CreateVendor from './pages/create/CreateVendor';
@@ -53,6 +54,17 @@ function App() {
 									)
 								}
 							/>
+							<Route
+								path='/signup'
+								element={
+									!currentUser ? (
+										<SignUp currentUser={currentUser} />
+									) : (
+										<Navigate to='/' />
+									)
+								}
+							/>
+
 							<Route
 								path='/vendors/:vendorId'
 								element={
