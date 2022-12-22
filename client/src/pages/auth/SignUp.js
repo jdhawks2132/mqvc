@@ -33,14 +33,10 @@ const SignUp = () => {
 			})
 			.then((response) => {
 				localStorage.setItem('jwt', response.headers.authorization);
+				window.location.reload();
 			})
 			.catch((error) => {
-				setError(error.response.data.message);
-				console.log(error.response.data.message);
-				console.log(error.response.status);
-			})
-			.finally(() => {
-				window.location.reload();
+				setError(error.response.data.error);
 			});
 	};
 
@@ -111,6 +107,11 @@ const SignUp = () => {
 						required
 					/>
 				</div>
+				{error && (
+					<p className='text-red-500 bg-red-100 py-3 px-3 my-2 rounded'>
+						{error.length > 1 ? `${error[0]} & ${error[1]}` : error[0]}
+					</p>
+				)}
 				<button className='bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded'>
 					Submit
 				</button>

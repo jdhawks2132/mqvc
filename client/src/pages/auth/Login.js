@@ -6,6 +6,7 @@ import axios from 'axios';
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [error, setError] = useState(null);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -14,12 +15,11 @@ const Login = () => {
 			.post('users/sign_in', { user: { email, password } })
 			.then((response) => {
 				localStorage.setItem('jwt', response.headers.authorization);
+				window.location.reload();
 			})
 			.catch((error) => {
-				console.log('login error', error);
-			})
-			.finally(() => {
-				window.location.reload();
+				console.log(error);
+				setError(error.response.data);
 			});
 	};
 
@@ -59,6 +59,11 @@ const Login = () => {
 						required
 					/>
 				</div>
+				{error && (
+					<p className='text-red-500 bg-red-100 py-3 px-3 my-2 rounded'>
+						{error}
+					</p>
+				)}
 				<button className='bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded'>
 					Submit
 				</button>

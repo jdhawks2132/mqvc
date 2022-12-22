@@ -20,10 +20,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def register_failed
-    register json: {
-               message: 'Something went wrong',
-             },
-             status: :unprocessable_entity
+    render json: {
+             message: 'Something went wrong',
+             error: resource.errors.full_messages,
+           },
+           status: :unprocessable_entity
   end
 
   def sign_up_params
