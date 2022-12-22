@@ -7,7 +7,9 @@ import Sidebar from './components/nav/Sidebar';
 import Login from './pages/auth/Login';
 import SignUp from './pages/auth/SignUp';
 import Dashboard from './pages/dashboard/Dashboard';
+
 import VendorDetails from './pages/details/VendorDetails';
+import ContactDetails from './pages/details/ContactDetails';
 import CreateVendor from './pages/create/CreateVendor';
 import AdminDashboard from './pages/dashboard/AdminDashboard';
 
@@ -74,6 +76,12 @@ function App() {
 							<Route
 								path='/create-vendor'
 								element={isAdmin ? <CreateVendor /> : <Navigate to='/' />}
+							/>
+							<Route
+								path='/contacts/:contactId'
+								element={
+									currentUser ? <ContactDetails /> : <Navigate to='/login' />
+								}
 							/>
 							<Route
 								path='/admin'
