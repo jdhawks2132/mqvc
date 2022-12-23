@@ -2,6 +2,8 @@ import React from 'react';
 import { useContactQuery } from '../../store/mqvcAPI';
 import { useParams } from 'react-router-dom';
 
+import ContactForm from '../../components/forms/ContactForm';
+
 const ContactDetails = () => {
 	const id = useParams().contactId;
 
@@ -9,7 +11,12 @@ const ContactDetails = () => {
 
 	console.log(data);
 
-	return <div>ContactDetails</div>;
+	return (
+		<div>
+			<h1>Contact Details</h1>
+			{data && <ContactForm contact={data} />}
+		</div>
+	);
 };
 
 export default ContactDetails;

@@ -50,6 +50,7 @@ puts 'Creating contacts...'
     street_address: Faker::Address.street_address,
     city: Faker::Address.city,
     state: Faker::Address.state_abbr,
+    zip: Faker::Address.zip_code,
     phone: Faker::PhoneNumber.cell_phone,
     title: Faker::Job.title,
     organization: Faker::Company.name,

@@ -34,7 +34,6 @@ class Api::V1::ContactsController < ApiController
     head :no_content
   end
 
-  end
   private
 
   def set_contact
