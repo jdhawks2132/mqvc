@@ -10,8 +10,6 @@ const VendorDetails = () => {
 
 	const { data: vendor, isSuccess } = useVendorQuery(id);
 
-	console.log(vendor);
-
 	return (
 		<div>
 			{isSuccess && (

@@ -54,8 +54,6 @@ const Dashboard = ({ currentUser }) => {
 		setVendors(filteredVendors);
 	};
 
-	console.log(filters);
-
 	return (
 		<div>
 			<h2 className='m-11 text-2xl'>{currentUser.first_name}'s Vendors</h2>
