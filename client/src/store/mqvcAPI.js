@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const mqvcAPI = createApi({
 	reducerPath: 'api',
 	baseQuery: fetchBaseQuery({ baseUrl: '/' }),
-	tagTypes: ['user', 'vendor', 'contact'],
+	tagTypes: ['User', 'Vendor', 'Contact'],
 	endpoints: (builder) => ({
 		currentUser: builder.query({
 			query: () => ({
@@ -12,33 +12,33 @@ export const mqvcAPI = createApi({
 				credentials: 'include',
 				headers: { Authorization: localStorage.getItem('jwt') },
 			}),
-			providesTags: ['user'],
+			providesTags: ['User'],
 		}),
 		vendors: builder.query({
 			query: () => 'api/v1/vendors',
-			providesTags: ['vendor'],
+			providesTags: ['Vendor'],
 		}),
 		vendor: builder.query({
 			query: (id) => `api/v1/vendors/${id}`,
-			providesTags: ['vendor'],
+			providesTags: ['Vendor'],
 		}),
 		contacts: builder.query({
 			query: () => 'api/v1/contacts',
-			providesTags: ['contact'],
+			providesTags: ['Contact'],
 		}),
 		contact: builder.query({
 			query: (id) => `api/v1/contacts/${id}`,
-			providesTags: ['contact'],
+			providesTags: ['Contact'],
 		}),
 		signOut: builder.mutation({
 			query: () => ({
-				url: 'users/sign_out',
+				url: 'Users/sign_out',
 				method: 'DELETE',
 				body: {},
 				credentials: 'include',
 				headers: { Authorization: localStorage.getItem('jwt') },
 			}),
-			invalidateTags: ['user'],
+			invalidateTags: ['User'],
 		}),
 		createVendor: builder.mutation({
 			query: (vendor) => ({
@@ -48,7 +48,7 @@ export const mqvcAPI = createApi({
 				credentials: 'include',
 				headers: { Authorization: localStorage.getItem('jwt') },
 			}),
-			invalidateTags: ['vendor'],
+			invalidateTags: ['Vendor'],
 		}),
 	}),
 });
