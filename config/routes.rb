@@ -21,4 +21,8 @@ Rails.application.routes.draw do
       get '/vendors_by_assignment', to: 'vendors#vendors_by_assignment'
     end
   end
+
+  get '*path',
+      to: 'fallback#index',
+      constraints: ->(req) { !req.xhr? && req.format.html? }
 end
