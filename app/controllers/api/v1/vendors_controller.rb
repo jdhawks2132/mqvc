@@ -59,10 +59,17 @@ class Api::V1::VendorsController < ApiController
   def vendor_params
     params.require(:vendor).permit(
       :name,
-      :address,
-      :phone,
-      :email,
+      :vendor_type,
+      :status,
+      :general_email,
       :website,
+      :phone,
+      :street_address,
+      :city,
+      :state,
+      :zip,
+      :country,
+      :previous_participant,
       :notes,
     )
   end
