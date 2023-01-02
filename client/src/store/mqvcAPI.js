@@ -30,7 +30,6 @@ export const mqvcAPI = createApi({
 			query: (id) => `api/v1/contacts/${id}`,
 			providesTags: ['contact'],
 		}),
-
 		signOut: builder.mutation({
 			query: () => ({
 				url: 'users/sign_out',
@@ -40,6 +39,16 @@ export const mqvcAPI = createApi({
 				headers: { Authorization: localStorage.getItem('jwt') },
 			}),
 			invalidateTags: ['user'],
+		}),
+		createVendor: builder.mutation({
+			query: (vendor) => ({
+				url: 'api/v1/vendors',
+				method: 'POST',
+				body: vendor,
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidateTags: ['vendor'],
 		}),
 	}),
 });
@@ -51,4 +60,5 @@ export const {
 	useContactsQuery,
 	useContactQuery,
 	useSignOutMutation,
+	useCreateVendorMutation,
 } = mqvcAPI;
