@@ -43,6 +43,7 @@ const SignUp = () => {
 	return (
 		<div className='container mx-auto'>
 			<form onSubmit={handleSubmit} className='w-4/5 md:w-1/3 m-11 mx-auto'>
+				<h2 className='text-2xl my-11'>Sign Up:</h2>
 				<div className='form-group'>
 					<label
 						htmlFor='firstName'
