@@ -22,7 +22,6 @@ puts 'Creating vendors...'
 vendor_status_opts = %w[Active Contacted Confirmed Paid Inactive]
 vendor_type_opts = %w[Collegiate Festival Manufacturer Distributor Retailer]
 
-# use faker to create 50 vendors
 15.times do |i|
   Vendor.create!(
     name: Faker::Company.name,
