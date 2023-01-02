@@ -66,7 +66,6 @@ function App() {
 									)
 								}
 							/>
-
 							<Route
 								path='/vendors/:vendorId'
 								element={
@@ -87,6 +86,8 @@ function App() {
 								path='/admin'
 								element={isAdmin ? <AdminDashboard /> : <Navigate to='/' />}
 							/>
+							{/* fallback route */}
+							<Route path='*' element={<Navigate to='/' />} />
 						</Routes>
 					</div>
 				</BrowserRouter>
