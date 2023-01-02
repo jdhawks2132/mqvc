@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = ({ currentUser }) => {
 	return (
-		<div className='w-72 min-w-72 bg-gray-800 h-screen'>
+		<div className='w-72 min-w-72 bg-gray-800 h-100 min-h-screen'>
 			<div className='flex flex-col items-center justify-center h-20 bg-gray-900'>
 				<div className='flex items-center'>
 					<div className='flex-shrink-0'>
