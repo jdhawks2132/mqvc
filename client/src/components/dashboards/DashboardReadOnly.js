@@ -24,7 +24,7 @@ const DashboardReadOnly = ({ vendor }) => {
 				{primary_contact ? primary_contact.first_name : 'No Primary Set'}
 			</td>
 			<td className='border px-2 py-1 text-xs '>
-				{users ? users[0].first_name : 'No Assigned To Set'}
+				{users && users[0] ? users[0].first_name : 'Not Assigned'}
 			</td>
 			<td className='border px-2 py-1 text-xs'>
 				<Link to={`/vendors/${vendor.id}`}>
