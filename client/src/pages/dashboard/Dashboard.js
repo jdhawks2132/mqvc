@@ -5,7 +5,9 @@ import { useVendorsQuery } from '../../store/mqvcAPI';
 import DashboardReadOnly from '../../components/dashboards/DashboardReadOnly';
 
 const Dashboard = ({ currentUser }) => {
-	const { data, isSuccess } = useVendorsQuery();
+	const { data, isSuccess } = useVendorsQuery({
+		refetchOnMountOrArgChange: true,
+	});
 	const [vendors, setVendors] = useState([]);
 	const [filters, setFilters] = useState({ status: '', vendor_type: '' });
 	const [toggleSearch, setToggleSearch] = useState(false);

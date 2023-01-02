@@ -38,7 +38,7 @@ export const mqvcAPI = createApi({
 				credentials: 'include',
 				headers: { Authorization: localStorage.getItem('jwt') },
 			}),
-			invalidateTags: ['User'],
+			invalidatesTags: ['User'],
 		}),
 		createVendor: builder.mutation({
 			query: (vendor) => ({
@@ -48,7 +48,7 @@ export const mqvcAPI = createApi({
 				credentials: 'include',
 				headers: { Authorization: localStorage.getItem('jwt') },
 			}),
-			invalidateTags: ['Vendor'],
+			invalidatesTags: ['Vendor'],
 		}),
 	}),
 });
