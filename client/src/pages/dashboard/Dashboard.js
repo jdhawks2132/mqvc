@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { vendorStatusFilters, vendorTypeFilters } from '../../utils/options';
 
 import { useVendorsQuery } from '../../store/mqvcAPI';
 import DashboardReadOnly from '../../components/dashboards/DashboardReadOnly';
@@ -16,24 +17,6 @@ const Dashboard = ({ currentUser }) => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, isSuccess, filters]);
-
-	// vendor_status_opts = %w[Active Contacted Confirmed Paid Inactive]
-	const vendorStatusFilters = [
-		{ label: 'Active', value: 'Active' },
-		{ label: 'Contacted', value: 'Contacted' },
-		{ label: 'Confirmed', value: 'Confirmed' },
-		{ label: 'Paid', value: 'Paid' },
-		{ label: 'Inactive', value: 'Inactive' },
-	];
-
-	// vendor_type_opts = %w[Collegiate Festival Manufacturer Distributor Retailer]
-	const vendorTypeFilters = [
-		{ label: 'Collegiate', value: 'Collegiate' },
-		{ label: 'Festival', value: 'Festival' },
-		{ label: 'Manufacturer', value: 'Manufacturer' },
-		{ label: 'Distributor', value: 'Distributor' },
-		{ label: 'Retailer', value: 'Retailer' },
-	];
 
 	const handleFilterChange = (e) => {
 		const { name, value } = e.target;

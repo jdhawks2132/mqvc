@@ -20,7 +20,7 @@ const Navbar = ({ currentUser }) => {
 			<div className='flex items-center flex-shrink-0 text-white mr-6'>
 				<span className='font-semibold text-xl tracking-tight'>
 					<Link to='/' className='text-gray-200 hover:text-white mr-4'>
-						VendorFlow
+						{currentUser ? 'My Vendors' : 'VendorFlow'}
 					</Link>
 				</span>
 			</div>
@@ -41,22 +41,16 @@ const Navbar = ({ currentUser }) => {
 					{currentUser ? (
 						<>
 							<Link
-								to='/vendors'
-								className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'
-							>
-								Vendors
-							</Link>
-							<Link
 								to='/contacts'
 								className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'
 							>
-								Contacts
+								Contacts (coming soon)
 							</Link>
 							<Link
 								to='/mailers'
 								className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white'
 							>
-								Mailers
+								Mailers (coming soon)
 							</Link>
 						</>
 					) : null}
