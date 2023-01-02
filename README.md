@@ -65,7 +65,7 @@ Frontend
 
 Backend
 
-- Ruby 3.0.3
+- Ruby 3.1.0
 - Rails (API) 7.0.4
 - PostgreSQL
 - Devise
@@ -74,7 +74,7 @@ Backend
 ## Installation
 
 1. Clone the repo
-2. Make sure you have Ruby 3.0.3, Rails 7.0.4, and PostgreSQL installed
+2. Make sure you have Ruby 3.1.0, Rails 7.0.4, and PostgreSQL installed
 3. Run `bundle install` to install the required gems
 4. Run `rails db:create` to create the database
 5. Migration and seed the database with `rails db:migrate db:seed`
