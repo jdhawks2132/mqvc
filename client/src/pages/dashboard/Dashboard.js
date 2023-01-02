@@ -119,15 +119,10 @@ const Dashboard = ({ currentUser }) => {
 							placeholder='Vendor Name'
 							onChange={handleSearch}
 						/>
-						<button type='submit' className='absolute right-0 top-0 mt-5 mr-4'>
-							<svg
-								className='text-gray-600 h-4 w-4 fill-current'
-								xmlns='http://www.w3.org/2000/svg'
-								viewBox='0 0 56.966 56.966'
-							>
-								<path d='M55.525 52.941l-14.14-14.14c1.688-2.344 2.688-5.203 2.688-8.301C47.453 12.703 34.75 0 23.727 0S0 12.703 0 23.727s12.703 23.727 23.727 23.727c3.098 0 5.957-1 8.301-2.688l14.14 14.14c.586.586 1.34.879 2.121.879s1.535-.293 2.121-.879c1.172-1.172 1.172-3.071 0-4.243zM23.727 42.453c-9.293 0-16.727-7.434-16.727-16.727S14.434 8.999 23.727 8.999s16.727 7.434 16.727 16.727-7.434 16.727-16.727 16.727z' />
-							</svg>
-						</button>
+						<button
+							type='submit'
+							className='absolute right-0 top-0 mt-5 mr-4'
+						></button>
 						<button
 							className='ml-4 bg-purple-700 text-white py-1 px-2 rounded hover:bg-purple-800'
 							// reset filters and set options back to default
