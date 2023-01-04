@@ -51,20 +51,22 @@ export const states = [
 	{ value: 'WY', label: 'Wyoming' },
 ];
 
-	// vendor_status_opts = %w[Active Contacted Confirmed Paid Inactive]
-	export const vendorStatusFilters = [
-		{ label: 'Active', value: 'Active' },
-		{ label: 'Contacted', value: 'Contacted' },
-		{ label: 'Confirmed', value: 'Confirmed' },
-		{ label: 'Paid', value: 'Paid' },
-		{ label: 'Inactive', value: 'Inactive' },
-	];
+// vendor_status_opts = %w[Active Contacted Confirmed Paid Inactive]
+export const vendorStatusFilters = [
+	{ label: 'New', value: 'New' },
+	{ label: 'Active', value: 'Active' },
+	{ label: 'Contacted', value: 'Contacted' },
+	{ label: 'Confirmed', value: 'Confirmed' },
+	{ label: 'Paid', value: 'Paid' },
+	{ label: 'Inactive', value: 'Inactive' },
+];
 
-	// vendor_type_opts = %w[Collegiate Festival Manufacturer Distributor Retailer]
-	export const vendorTypeFilters = [
-		{ label: 'Collegiate', value: 'Collegiate' },
-		{ label: 'Festival', value: 'Festival' },
-		{ label: 'Manufacturer', value: 'Manufacturer' },
-		{ label: 'Distributor', value: 'Distributor' },
-		{ label: 'Retailer', value: 'Retailer' },
-	];
+// vendor_type_opts = %w[Collegiate Festival Manufacturer Distributor Retailer]
+export const vendorTypeFilters = [
+	{ label: 'Reed Maker', value: 'Reed Maker' },
+	{ label: 'Collegiate', value: 'Collegiate' },
+	{ label: 'Festival', value: 'Festival' },
+	{ label: 'Manufacturer', value: 'Manufacturer' },
+	{ label: 'Distributor', value: 'Distributor' },
+	{ label: 'Retailer', value: 'Retailer' },
+];

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useCurrentUserQuery } from '../../store/mqvcAPI';
-import { states } from '../../utils/options';
+import {
+	states,
+	vendorStatusFilters,
+	vendorTypeFilters,
+} from '../../utils/options';
 import { useCreateVendorMutation } from '../../store/mqvcAPI';
 import { useNavigate } from 'react-router-dom';
 
@@ -95,19 +99,33 @@ const VendorForm = ({ vendor }) => {
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
 							htmlFor='grid-vendor-type'
 						>
-							Vendor Type
+							Type
 						</label>
-						<input
-							className='appearance-none block w-full bg-gray-100 text-gray-800 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-							id='grid-vendor-type'
-							type='text'
-							placeholder='Vendor Type'
-							name='vendor_type'
-							value={formState.vendor_type}
-							onChange={handleChange}
-							disabled={isDisabled}
-							required
-						/>
+						<div className='relative'>
+							<select
+								className='appearance-none block w-full bg-gray-100 text-gray-800 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+								id='grid-vendor-type'
+								name='vendor_type'
+								value={formState.vendor_type}
+								onChange={handleChange}
+								disabled={isDisabled}
+							>
+								{vendorTypeFilters.map((type, index) => (
+									<option key={type.label} value={type.value}>
+										{type.label}
+									</option>
+								))}
+							</select>
+							<div className='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'>
+								<svg
+									className='fill-current h-4 w-4'
+									xmlns='http://www.w3.org/2000/svg'
+									viewBox='0 0 20 20'
+								>
+									<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
+								</svg>
+							</div>
+						</div>
 					</div>
 					<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
 						<label
@@ -116,17 +134,31 @@ const VendorForm = ({ vendor }) => {
 						>
 							Status
 						</label>
-						<input
-							className='appearance-none block w-full bg-gray-100 text-gray-800 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-							id='grid-status'
-							type='text'
-							placeholder='Status'
-							name='status'
-							value={formState.status}
-							onChange={handleChange}
-							disabled={isDisabled}
-							required
-						/>
+						<div className='relative'>
+							<select
+								className='appearance-none block w-full bg-gray-100 text-gray-800 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+								id='grid-status'
+								name='status'
+								value={formState.status}
+								onChange={handleChange}
+								disabled={isDisabled}
+							>
+								{vendorStatusFilters.map((status, index) => (
+									<option key={status.label} value={status.value}>
+										{status.label}
+									</option>
+								))}
+							</select>
+							<div className='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'>
+								<svg
+									className='fill-current h-4 w-4'
+									xmlns='http://www.w3.org/2000/svg'
+									viewBox='0 0 20 20'
+								>
+									<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
+								</svg>
+							</div>
+						</div>
 					</div>
 					<div className='w-full md:w-1/2 px-3'>
 						<label
@@ -304,7 +336,7 @@ const VendorForm = ({ vendor }) => {
 							type='text'
 							placeholder='Previous Participant?'
 							name='previous_participant'
-							value={formState.previous_participant === 't' ? 'True' : 'False'}
+							value={formState.previous_participant}
 							onChange={handleChange}
 							disabled={isDisabled}
 						/>
