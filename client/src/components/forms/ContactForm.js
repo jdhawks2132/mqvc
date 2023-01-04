@@ -1,39 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { useCurrentUserQuery } from '../../store/mqvcAPI';
-import { states } from '../../utils/options';
+import { useParams } from 'react-router-dom';
+import { states, booleanOptions } from '../../utils/options';
 
 const ContactForm = ({ contact }) => {
 	const [isDisabled, setIsDisabled] = useState(true);
-	const { data: currentUser } = useCurrentUserQuery();
-
-	// contact schema from rails:
-
-	// t.string "first_name"
-	// t.string "last_name"
-	// t.string "street_address"
-	// t.string "city"
-	// t.string "state"
-	// t.string "zip_code"
-	// t.string "phone"
-	// t.string "title"
-	// t.string "organization"
-	// t.string "email"
-	// t.datetime "created_at", null: false
-	// t.datetime "updated_at", null: false
-	// t.boolean "primary"
+	const { vendorId } = useParams();
 
 	const [formState, setFormState] = useState({
-		first_name: contact.first_name || '',
-		last_name: contact.last_name || '',
-		street_address: contact.street_address || '',
-		city: contact.city || '',
-		state: contact.state || '',
-		zip_code: contact.zip_code || '',
-		phone: contact.phone || '',
-		title: contact.title || '',
-		organization: contact.organization || '',
-		email: contact.email || '',
-		primary: contact.primary || false,
+		first_name: contact?.first_name || '',
+		last_name: contact?.last_name || '',
+		street_address: contact?.street_address || '',
+		city: contact?.city || '',
+		state: contact?.state || '',
+		zip_code: contact?.zip_code || '',
+		phone: contact?.phone || '',
+		title: contact?.title || '',
+		organization: contact?.organization || '',
+		email: contact?.email || '',
+		primary: contact?.primary || '',
 	});
 
 	const handleChange = (e) => {
@@ -42,6 +26,12 @@ const ContactForm = ({ contact }) => {
 			[e.target.name]: e.target.value,
 		});
 	};
+
+	useEffect(() => {
+		if (!contact) {
+			setIsDisabled(false);
+		}
+	}, [contact]);
 
 	return (
 		<div>
@@ -255,20 +245,33 @@ const ContactForm = ({ contact }) => {
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
 							htmlFor='grid-primary'
 						>
-							Primary Contact?
+							Primary Contact ?
 						</label>
-						<input
-							className={`appearance-none block w-full bg-gray-100 text-gray-800 border ${
-								contact.primary ? 'border-emerald-600 ' : 'border-red-600'
-							} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`}
-							id='grid-primary'
-							type='text'
-							placeholder='Primary Contact'
-							name='primary'
-							value={formState.primary ? 'Yes' : 'No'}
-							onChange={handleChange}
-							disabled={isDisabled}
-						/>
+						<div className='relative'>
+							<select
+								className='appearance-none block w-full bg-gray-100 text-gray-800 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+								id='grid-primary'
+								name='primary'
+								value={formState.primary}
+								onChange={handleChange}
+								disabled={isDisabled}
+							>
+								{booleanOptions.map((opts, index) => (
+									<option key={opts.label} value={opts.value}>
+										{opts.label}
+									</option>
+								))}
+							</select>
+							<div className='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'>
+								<svg
+									className='fill-current h-4 w-4'
+									xmlns='http://www.w3.org/2000/svg'
+									viewBox='0 0 20 20'
+								>
+									<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
+								</svg>
+							</div>
+						</div>
 					</div>
 				</div>
 			</form>

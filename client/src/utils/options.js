@@ -53,6 +53,7 @@ export const states = [
 
 // vendor_status_opts = %w[Active Contacted Confirmed Paid Inactive]
 export const vendorStatusFilters = [
+	{ label: 'Select Status', value: '' },
 	{ label: 'New', value: 'New' },
 	{ label: 'Active', value: 'Active' },
 	{ label: 'Contacted', value: 'Contacted' },
@@ -63,10 +64,17 @@ export const vendorStatusFilters = [
 
 // vendor_type_opts = %w[Collegiate Festival Manufacturer Distributor Retailer]
 export const vendorTypeFilters = [
+	{ label: 'Select Type', value: '' },
 	{ label: 'Reed Maker', value: 'Reed Maker' },
 	{ label: 'Collegiate', value: 'Collegiate' },
 	{ label: 'Festival', value: 'Festival' },
 	{ label: 'Manufacturer', value: 'Manufacturer' },
 	{ label: 'Distributor', value: 'Distributor' },
 	{ label: 'Retailer', value: 'Retailer' },
+];
+
+export const booleanOptions = [
+	{ label: 'Select', value: '' },
+	{ label: 'Yes', value: true },
+	{ label: 'No', value: false },
 ];

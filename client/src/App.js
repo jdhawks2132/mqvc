@@ -11,6 +11,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 import VendorDetails from './pages/details/VendorDetails';
 import ContactDetails from './pages/details/ContactDetails';
 import CreateVendor from './pages/create/CreateVendor';
+import CreateContact from './pages/create/CreateContact';
 import AdminDashboard from './pages/dashboard/AdminDashboard';
 
 function App() {
@@ -81,6 +82,10 @@ function App() {
 								element={
 									currentUser ? <ContactDetails /> : <Navigate to='/login' />
 								}
+							/>
+							<Route
+								path='/create-contact/:vendorId'
+								element={isAdmin ? <CreateContact /> : <Navigate to='/' />}
 							/>
 							<Route
 								path='/admin'

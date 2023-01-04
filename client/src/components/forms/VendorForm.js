@@ -32,6 +32,8 @@ const VendorForm = ({ vendor }) => {
 		notes: vendor?.notes || '',
 	});
 
+	console.log(formState);
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormState((prevState) => ({

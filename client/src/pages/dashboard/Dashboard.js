@@ -69,7 +69,6 @@ const Dashboard = ({ currentUser }) => {
 							onChange={handleFilterChange}
 							value={filters.status}
 						>
-							<option value=''>Filter by Status</option>
 							{vendorStatusFilters.map((filter) => (
 								<option key={filter.value} value={filter.value}>
 									{filter.label}
@@ -83,7 +82,6 @@ const Dashboard = ({ currentUser }) => {
 							onChange={handleFilterChange}
 							value={filters.vendor_type}
 						>
-							<option value=''>Filter by Type</option>
 							{vendorTypeFilters.map((filter) => (
 								<option key={filter.value} value={filter.value}>
 									{filter.label}

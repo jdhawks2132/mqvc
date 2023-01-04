@@ -1,6 +1,6 @@
 import React from 'react';
 import { useVendorQuery } from '../../store/mqvcAPI';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import VendorForm from '../../components/forms/VendorForm';
 import ContactCard from '../../components/cards/ContactCard';
@@ -31,7 +31,11 @@ const VendorDetails = () => {
 											)
 									)
 								) : (
-									<p>No contacts attached to vendor</p>
+									<Link to={`/create-contact/${vendor.id}`}>
+										<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+											Create Contact
+										</button>
+									</Link>
 								)}
 							</>
 						</div>
