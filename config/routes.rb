@@ -1,6 +1,9 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   # Defines the root path route ("/")
   # root "articles#index"
   devise_for :users,
