@@ -4,7 +4,7 @@ import {
 	states,
 	vendorStatusFilters,
 	vendorTypeFilters,
-	booleanOptions
+	booleanOptions,
 } from '../../utils/options';
 import { useCreateVendorMutation } from '../../store/mqvcAPI';
 import { useNavigate } from 'react-router-dom';
@@ -71,18 +71,18 @@ const VendorForm = ({ vendor }) => {
 					className={`ml-11 mt-4 p-2 text-white rounded ${
 						isDisabled ? 'bg-green-700 ' : 'bg-red-700'
 					}`}
-					onClick={() => setIsDisabled(!isDisabled)}
-				>
+					onClick={() => setIsDisabled(!isDisabled)}>
 					{isDisabled ? 'Click to Edit Vendor' : 'Lock Vendor'}
 				</button>
 			) : null}
-			<form onSubmit={handleSubmit} className='w-3/4 ml-11 mt-4'>
+			<form
+				onSubmit={handleSubmit}
+				className='w-3/4 ml-11 mt-4'>
 				<div className='flex flex-wrap -mx-3 mb-6'>
 					<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-name'
-						>
+							htmlFor='grid-name'>
 							Name
 						</label>
 						<input
@@ -100,8 +100,7 @@ const VendorForm = ({ vendor }) => {
 					<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-vendor-type'
-						>
+							htmlFor='grid-vendor-type'>
 							Type
 						</label>
 						<div className='relative'>
@@ -111,10 +110,11 @@ const VendorForm = ({ vendor }) => {
 								name='vendor_type'
 								value={formState.vendor_type}
 								onChange={handleChange}
-								disabled={isDisabled}
-							>
+								disabled={isDisabled}>
 								{vendorTypeFilters.map((type, index) => (
-									<option key={type.label} value={type.value}>
+									<option
+										key={type.label}
+										value={type.value}>
 										{type.label}
 									</option>
 								))}
@@ -123,8 +123,7 @@ const VendorForm = ({ vendor }) => {
 								<svg
 									className='fill-current h-4 w-4'
 									xmlns='http://www.w3.org/2000/svg'
-									viewBox='0 0 20 20'
-								>
+									viewBox='0 0 20 20'>
 									<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
 								</svg>
 							</div>
@@ -133,8 +132,7 @@ const VendorForm = ({ vendor }) => {
 					<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-status'
-						>
+							htmlFor='grid-status'>
 							Status
 						</label>
 						<div className='relative'>
@@ -144,10 +142,11 @@ const VendorForm = ({ vendor }) => {
 								name='status'
 								value={formState.status}
 								onChange={handleChange}
-								disabled={isDisabled}
-							>
+								disabled={isDisabled}>
 								{vendorStatusFilters.map((status, index) => (
-									<option key={status.label} value={status.value}>
+									<option
+										key={status.label}
+										value={status.value}>
 										{status.label}
 									</option>
 								))}
@@ -156,8 +155,7 @@ const VendorForm = ({ vendor }) => {
 								<svg
 									className='fill-current h-4 w-4'
 									xmlns='http://www.w3.org/2000/svg'
-									viewBox='0 0 20 20'
-								>
+									viewBox='0 0 20 20'>
 									<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
 								</svg>
 							</div>
@@ -166,8 +164,7 @@ const VendorForm = ({ vendor }) => {
 					<div className='w-full md:w-1/2 px-3'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-general-email'
-						>
+							htmlFor='grid-general-email'>
 							General Email
 						</label>
 						<input
@@ -185,8 +182,7 @@ const VendorForm = ({ vendor }) => {
 					<div className='w-full md:w-1/2 px-3'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-phone'
-						>
+							htmlFor='grid-phone'>
 							Phone
 						</label>
 						<input
@@ -204,8 +200,7 @@ const VendorForm = ({ vendor }) => {
 					<div className='w-full md:w-1/2 px-3'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-website'
-						>
+							htmlFor='grid-website'>
 							Website
 						</label>
 						<input
@@ -243,8 +238,7 @@ const VendorForm = ({ vendor }) => {
 					<div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-city'
-						>
+							htmlFor='grid-city'>
 							City
 						</label>
 						<input
@@ -260,8 +254,7 @@ const VendorForm = ({ vendor }) => {
 					<div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-state'
-						>
+							htmlFor='grid-state'>
 							State
 						</label>
 						<div className='relative'>
@@ -271,10 +264,11 @@ const VendorForm = ({ vendor }) => {
 								name='state'
 								value={formState.state}
 								onChange={handleChange}
-								disabled={isDisabled}
-							>
+								disabled={isDisabled}>
 								{states.map((state, index) => (
-									<option key={state.label} value={state.value}>
+									<option
+										key={state.label}
+										value={state.value}>
 										{state.label}
 									</option>
 								))}
@@ -283,8 +277,7 @@ const VendorForm = ({ vendor }) => {
 								<svg
 									className='fill-current h-4 w-4'
 									xmlns='http://www.w3.org/2000/svg'
-									viewBox='0 0 20 20'
-								>
+									viewBox='0 0 20 20'>
 									<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
 								</svg>
 							</div>
@@ -293,8 +286,7 @@ const VendorForm = ({ vendor }) => {
 					<div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-zip'
-						>
+							htmlFor='grid-zip'>
 							Zip
 						</label>
 						<input
@@ -311,8 +303,7 @@ const VendorForm = ({ vendor }) => {
 					<div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-country'
-						>
+							htmlFor='grid-country'>
 							Country
 						</label>
 						<input
@@ -327,10 +318,9 @@ const VendorForm = ({ vendor }) => {
 						/>
 					</div>
 					<div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
-					<label
+						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-previous_participant'
-						>
+							htmlFor='grid-previous_participant'>
 							Previous Participant ?
 						</label>
 						<div className='relative'>
@@ -340,10 +330,11 @@ const VendorForm = ({ vendor }) => {
 								name='previous_participant'
 								value={formState.previous_participant}
 								onChange={handleChange}
-								disabled={isDisabled}
-							>
+								disabled={isDisabled}>
 								{booleanOptions.map((opts, index) => (
-									<option key={index} value={opts.value}>
+									<option
+										key={index}
+										value={opts.value}>
 										{opts.label}
 									</option>
 								))}
@@ -352,8 +343,7 @@ const VendorForm = ({ vendor }) => {
 								<svg
 									className='fill-current h-4 w-4'
 									xmlns='http://www.w3.org/2000/svg'
-									viewBox='0 0 20 20'
-								>
+									viewBox='0 0 20 20'>
 									<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
 								</svg>
 							</div>
@@ -364,8 +354,7 @@ const VendorForm = ({ vendor }) => {
 					<div className='w-full px-3'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-notes'
-						>
+							htmlFor='grid-notes'>
 							Notes
 						</label>
 						<textarea
@@ -384,8 +373,7 @@ const VendorForm = ({ vendor }) => {
 				{!isDisabled && (
 					<button
 						className='bg-blue-500 hover:bg-blue-700 text-white font-bold mb-4 py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-						type='submit'
-					>
+						type='submit'>
 						Submit
 					</button>
 				)}

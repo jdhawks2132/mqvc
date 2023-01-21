@@ -1,5 +1,5 @@
 import React from 'react';
-import { useVendorQuery } from '../../store/mqvcAPI';
+import { useVendorQuery, useCurrentUserQuery } from '../../store/mqvcAPI';
 import { useParams, Link } from 'react-router-dom';
 
 import VendorForm from '../../components/forms/VendorForm';
@@ -9,6 +9,9 @@ const VendorDetails = () => {
 	const id = useParams().vendorId;
 
 	const { data: vendor, isSuccess } = useVendorQuery(id);
+	const { data: currentUser } = useCurrentUserQuery();
+
+	console.log(currentUser);
 
 	return (
 		<div>
@@ -27,15 +30,26 @@ const VendorDetails = () => {
 										(contact) =>
 											// only if the contact is not the primary contact
 											contact.id !== vendor.primary_contact.id && (
-												<ContactCard key={contact.id} contact={contact} />
+												<ContactCard
+													key={contact.id}
+													contact={contact}
+												/>
 											)
 									)
 								) : (
-									<Link to={`/create-contact/${vendor.id}`}>
-										<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-											Create Contact
-										</button>
-									</Link>
+									<>
+										{currentUser.admin_level > 2 ? (
+											<Link to={`/create-contact/${vendor.id}`}>
+												<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+													Create Contact
+												</button>
+											</Link>
+										) : (
+											<p className='text-xl font-bold'>
+												No contacts for this vendor
+											</p>
+										)}
+									</>
 								)}
 							</>
 						</div>

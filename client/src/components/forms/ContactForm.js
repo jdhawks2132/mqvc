@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { states, booleanOptions } from '../../utils/options';
+import {
+	useCreateContactMutation,
+	useCreateVendorContactMutation,
+} from '../../store/mqvcAPI';
 
 const ContactForm = ({ contact }) => {
 	const [isDisabled, setIsDisabled] = useState(true);
@@ -20,6 +24,8 @@ const ContactForm = ({ contact }) => {
 		primary: contact?.primary || '',
 	});
 
+	console.log(formState);
+
 	const handleChange = (e) => {
 		setFormState({
 			...formState,
@@ -33,15 +39,38 @@ const ContactForm = ({ contact }) => {
 		}
 	}, [contact]);
 
+	const [createContact] = useCreateContactMutation();
+	const [createVendorContact, { isSuccess: isSuccess2 }] =
+		useCreateVendorContactMutation();
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const newContact = {
+			...formState,
+		};
+		const response = await createContact(newContact);
+		if (response && vendorId) {
+			const newVendorContact = {
+				vendor_id: parseInt(vendorId),
+				contact_id: response.data.id,
+			};
+			const response2 = await createVendorContact(newVendorContact);
+			if (isSuccess2) {
+				console.log(response2);
+			}
+		}
+	};
+
 	return (
 		<div>
-			<form className='w-3/4 ml-11 mt-4'>
+			<form
+				onSubmit={handleSubmit}
+				className='w-3/4 ml-11 mt-4'>
 				<div className='flex flex-wrap -mx-3 mb-6'>
 					<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-first-name'
-						>
+							htmlFor='grid-first-name'>
 							First Name
 						</label>
 						<input
@@ -59,8 +88,7 @@ const ContactForm = ({ contact }) => {
 					<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-last-name'
-						>
+							htmlFor='grid-last-name'>
 							Last Name
 						</label>
 						<input
@@ -78,8 +106,7 @@ const ContactForm = ({ contact }) => {
 					<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='title'
-						>
+							htmlFor='title'>
 							Title
 						</label>
 						<input
@@ -97,8 +124,7 @@ const ContactForm = ({ contact }) => {
 					<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='organization'
-						>
+							htmlFor='organization'>
 							Organization
 						</label>
 						<input
@@ -116,8 +142,7 @@ const ContactForm = ({ contact }) => {
 					<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='email'
-						>
+							htmlFor='email'>
 							Email
 						</label>
 						<input
@@ -135,8 +160,7 @@ const ContactForm = ({ contact }) => {
 					<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='phone'
-						>
+							htmlFor='phone'>
 							Phone
 						</label>
 						<input
@@ -156,8 +180,7 @@ const ContactForm = ({ contact }) => {
 					<div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-street-address'
-						>
+							htmlFor='grid-street-address'>
 							Address
 						</label>
 						<input
@@ -175,8 +198,7 @@ const ContactForm = ({ contact }) => {
 					<div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-city'
-						>
+							htmlFor='grid-city'>
 							City
 						</label>
 						<input
@@ -192,8 +214,7 @@ const ContactForm = ({ contact }) => {
 					<div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-state'
-						>
+							htmlFor='grid-state'>
 							State
 						</label>
 						<div className='relative'>
@@ -203,10 +224,11 @@ const ContactForm = ({ contact }) => {
 								name='state'
 								value={formState.state}
 								onChange={handleChange}
-								disabled={isDisabled}
-							>
+								disabled={isDisabled}>
 								{states.map((state, index) => (
-									<option key={state.label} value={state.value}>
+									<option
+										key={state.label}
+										value={state.value}>
 										{state.label}
 									</option>
 								))}
@@ -215,8 +237,7 @@ const ContactForm = ({ contact }) => {
 								<svg
 									className='fill-current h-4 w-4'
 									xmlns='http://www.w3.org/2000/svg'
-									viewBox='0 0 20 20'
-								>
+									viewBox='0 0 20 20'>
 									<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
 								</svg>
 							</div>
@@ -225,8 +246,7 @@ const ContactForm = ({ contact }) => {
 					<div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-zip'
-						>
+							htmlFor='grid-zip'>
 							Zip
 						</label>
 						<input
@@ -234,7 +254,7 @@ const ContactForm = ({ contact }) => {
 							id='grid-zip'
 							type='text'
 							placeholder='Zip Code'
-							name='zip'
+							name='zip_code'
 							value={formState.zip_code}
 							onChange={handleChange}
 							disabled={isDisabled}
@@ -243,8 +263,7 @@ const ContactForm = ({ contact }) => {
 					<div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
 						<label
 							className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-							htmlFor='grid-primary'
-						>
+							htmlFor='grid-primary'>
 							Primary Contact ?
 						</label>
 						<div className='relative'>
@@ -254,10 +273,11 @@ const ContactForm = ({ contact }) => {
 								name='primary'
 								value={formState.primary}
 								onChange={handleChange}
-								disabled={isDisabled}
-							>
+								disabled={isDisabled}>
 								{booleanOptions.map((opts, index) => (
-									<option key={opts.label} value={opts.value}>
+									<option
+										key={index}
+										value={opts.value}>
 										{opts.label}
 									</option>
 								))}
@@ -266,14 +286,20 @@ const ContactForm = ({ contact }) => {
 								<svg
 									className='fill-current h-4 w-4'
 									xmlns='http://www.w3.org/2000/svg'
-									viewBox='0 0 20 20'
-								>
+									viewBox='0 0 20 20'>
 									<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
 								</svg>
 							</div>
 						</div>
 					</div>
 				</div>
+				{!isDisabled && (
+					<button
+						className='bg-blue-500 hover:bg-blue-700 text-white font-bold mb-4 py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+						type='submit'>
+						Submit
+					</button>
+				)}
 			</form>
 		</div>
 	);

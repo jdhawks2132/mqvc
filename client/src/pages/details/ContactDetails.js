@@ -15,6 +15,8 @@ const ContactDetails = () => {
 		<div>
 			<h1>Contact Details</h1>
 			{data && <ContactForm contact={data} />}
+			{loading && <p>Loading...</p>}
+			{error && <p>Error: {error}</p>}
 		</div>
 	);
 };

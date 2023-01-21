@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :contacts
+      post '/contacts/create-vendor-contact',
+           to: 'contacts#create_vendor_contact'
       resources :vendors
       # add the export_vendors route
       get '/export-vendors', to: 'vendors#export_vendors'

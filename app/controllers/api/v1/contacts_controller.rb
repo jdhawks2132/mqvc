@@ -21,6 +21,19 @@ class Api::V1::ContactsController < ApiController
     end
   end
 
+  def create_vendor_contact
+    vendor_id = params[:vendor_id]
+    contact_id = params[:contact_id]
+
+    @vendor_contact =
+      VendorContact.new(vendor_id: vendor_id, contact_id: contact_id)
+    if @vendor_contact.save
+      render json: @vendor_contact, status: :created
+    else
+      render json: @vendor_contact.errors, status: :unprocessable_entity
+    end
+  end
+
   def update
     if @contact.update(contact_params)
       render json: @contact, status: :ok, serializer: ContactDetailSerializer
@@ -54,5 +67,9 @@ class Api::V1::ContactsController < ApiController
       :zip_code,
       :primary,
     )
+  end
+
+  def vendor_contact_params
+    params.require(:vendor_contact).permit(:contact_id, :vendor_id)
   end
 end

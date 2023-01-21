@@ -50,29 +50,26 @@ export const mqvcAPI = createApi({
 			}),
 			invalidatesTags: ['Vendor'],
 		}),
-		exportVendors: builder.query({
-			query: () => ({
-				url: 'api/v1/export-vendors',
-				method: 'GET',
+		createContact: builder.mutation({
+			query: (contact) => ({
+				url: 'api/v1/contacts',
+				method: 'POST',
+				body: contact,
 				credentials: 'include',
 				headers: { Authorization: localStorage.getItem('jwt') },
 			}),
+			invalidatesTags: ['Contact'],
 		}),
-		downloadCSV: builder.query({
-			query: () => ({
-				url: 'api/v1/download-csv',
-				method: 'GET',
+		createVendorContact: builder.mutation({
+			query: (vendorContact) => ({
+				url: 'api/v1/contacts/create-vendor-contact',
+				method: 'POST',
+				body: vendorContact,
 				credentials: 'include',
 				headers: { Authorization: localStorage.getItem('jwt') },
-				responseType: 'blob',
-				body: '',
-				onUploadProgress: (progressEvent) => {
-					const percentCompleted = Math.round(
-						(progressEvent.loaded * 100) / progressEvent.total
-					);
-					console.log(percentCompleted);
-				},
+				invalidatesTags: ['Vendor', 'Contact'],
 			}),
+			invalidatesTags: ['Vendor', 'Contact'],
 		}),
 	}),
 });
@@ -85,6 +82,6 @@ export const {
 	useContactQuery,
 	useSignOutMutation,
 	useCreateVendorMutation,
-	useExportVendorsQuery,
-	useDownloadCSVQuery,
+	useCreateContactMutation,
+	useCreateVendorContactMutation,
 } = mqvcAPI;
