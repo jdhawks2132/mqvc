@@ -72,6 +72,8 @@ Backend
 - PostgreSQL
 - Devise
 - Devise-jwt (for authentication)
+- Sidekiq (for background jobs)
+- Redis (for Sidekiq)
 
 ## Installation
 
