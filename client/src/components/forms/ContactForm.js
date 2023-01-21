@@ -25,8 +25,6 @@ const ContactForm = ({ contact }) => {
 		primary: contact?.primary_conversion || false,
 	});
 
-	console.log(formState);
-
 	const handleChange = (e) => {
 		setFormState({
 			...formState,

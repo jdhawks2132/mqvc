@@ -9,8 +9,6 @@ const ContactDetails = () => {
 
 	const { data, loading, error } = useContactQuery(id);
 
-	console.log(data);
-
 	return (
 		<div>
 			<h1>Contact Details</h1>

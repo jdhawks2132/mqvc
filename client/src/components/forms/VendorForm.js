@@ -59,8 +59,6 @@ const VendorForm = ({ vendor }) => {
 		setIsUpdate(!isUpdate);
 	};
 
-	console.log(isUpdate);
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
