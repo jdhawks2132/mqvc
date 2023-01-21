@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { useCurrentUserQuery } from '../../store/mqvcAPI';
 import {
 	states,
 	vendorStatusFilters,
 	vendorTypeFilters,
 	booleanOptions,
 } from '../../utils/options';
-import { useCreateVendorMutation } from '../../store/mqvcAPI';
+import {
+	useCreateVendorMutation,
+	useUpdateVendorMutation,
+	useCurrentUserQuery,
+} from '../../store/mqvcAPI';
 import { useNavigate } from 'react-router-dom';
 
 const VendorForm = ({ vendor }) => {
 	const [isDisabled, setIsDisabled] = useState(true);
 	const { data: currentUser } = useCurrentUserQuery();
 	const [errorMessages, setErrorMessages] = useState(null);
+	const [isUpdate, setIsUpdate] = useState(false);
+
+	// check to see if create-vendor is in the url
 
 	const [createVendorMutation, { error }] = useCreateVendorMutation();
+	const [updateVendorMutation] = useUpdateVendorMutation();
 	const navigate = useNavigate();
 
 	const [formState, setFormState] = useState({
@@ -29,11 +36,9 @@ const VendorForm = ({ vendor }) => {
 		state: vendor?.state || '',
 		zip: vendor?.zip || '',
 		country: vendor?.country || '',
-		previous_participant: vendor?.previous_participant || '',
+		previous_participant: vendor?.previous_participant_conversion || false,
 		notes: vendor?.notes || '',
 	});
-
-	console.log(formState);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -49,10 +54,20 @@ const VendorForm = ({ vendor }) => {
 		}
 	}, [vendor]);
 
+	const handleUpdateToggle = () => {
+		setIsDisabled(!isDisabled);
+		setIsUpdate(!isUpdate);
+	};
+
+	console.log(isUpdate);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// if the url includes /create-vendor, then we are creating a new vendor
-		if (window.location.href.includes('/create-vendor')) {
+
+		if (isUpdate) {
+			await updateVendorMutation({ id: vendor.id, ...formState });
+			setIsDisabled(true);
+		} else {
 			const { data } = await createVendorMutation(formState);
 			if (data) {
 				navigate(`/vendors/${data.id}`);
@@ -62,7 +77,6 @@ const VendorForm = ({ vendor }) => {
 			}
 		}
 	};
-
 	return (
 		// vendor form style like a form with using tailwindcss
 		<div>
@@ -71,8 +85,8 @@ const VendorForm = ({ vendor }) => {
 					className={`ml-11 mt-4 p-2 text-white rounded ${
 						isDisabled ? 'bg-green-700 ' : 'bg-red-700'
 					}`}
-					onClick={() => setIsDisabled(!isDisabled)}>
-					{isDisabled ? 'Click to Edit Vendor' : 'Lock Vendor'}
+					onClick={handleUpdateToggle}>
+					{isDisabled ? 'Click to Edit Vendor' : 'Cancel Edit'}
 				</button>
 			) : null}
 			<form
@@ -374,7 +388,7 @@ const VendorForm = ({ vendor }) => {
 					<button
 						className='bg-blue-500 hover:bg-blue-700 text-white font-bold mb-4 py-2 px-4 rounded focus:outline-none focus:shadow-outline'
 						type='submit'>
-						Submit
+						{isUpdate ? 'Save Changes and Lock Vendor' : 'Submit'}
 					</button>
 				)}
 			</form>

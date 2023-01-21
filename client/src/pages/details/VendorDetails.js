@@ -11,8 +11,6 @@ const VendorDetails = () => {
 	const { data: vendor, isSuccess } = useVendorQuery(id);
 	const { data: currentUser } = useCurrentUserQuery();
 
-	console.log(currentUser);
-
 	return (
 		<div>
 			{isSuccess && (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { states, booleanOptions } from '../../utils/options';
 import {
 	useCreateContactMutation,
@@ -9,6 +9,7 @@ import {
 const ContactForm = ({ contact }) => {
 	const [isDisabled, setIsDisabled] = useState(true);
 	const { vendorId } = useParams();
+	const navigate = useNavigate();
 
 	const [formState, setFormState] = useState({
 		first_name: contact?.first_name || '',
@@ -21,7 +22,7 @@ const ContactForm = ({ contact }) => {
 		title: contact?.title || '',
 		organization: contact?.organization || '',
 		email: contact?.email || '',
-		primary: contact?.primary || '',
+		primary: contact?.primary_conversion || false,
 	});
 
 	console.log(formState);
@@ -40,8 +41,7 @@ const ContactForm = ({ contact }) => {
 	}, [contact]);
 
 	const [createContact] = useCreateContactMutation();
-	const [createVendorContact, { isSuccess: isSuccess2 }] =
-		useCreateVendorContactMutation();
+	const [createVendorContact] = useCreateVendorContactMutation();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -55,8 +55,8 @@ const ContactForm = ({ contact }) => {
 				contact_id: response.data.id,
 			};
 			const response2 = await createVendorContact(newVendorContact);
-			if (isSuccess2) {
-				console.log(response2);
+			if (response2) {
+				navigate(`/vendors/${vendorId}`);
 			}
 		}
 	};

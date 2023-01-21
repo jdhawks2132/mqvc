@@ -11,6 +11,7 @@ class VendorDetailSerializer < ActiveModel::Serializer
              :zip,
              :country,
              :previous_participant,
+             :previous_participant_conversion,
              :notes,
              :vendor_type,
              :latest_contribution,
@@ -21,6 +22,17 @@ class VendorDetailSerializer < ActiveModel::Serializer
   has_many :contacts
   has_many :contributions
   has_many :registrations
+
+  def previous_participant_conversion
+    # convert the postgresql boolean to a ruby boolean
+    if object.previous_participant == 't'
+      true
+    elsif object.previous_participant == 'f'
+      false
+    else
+      return object.previous_participant
+    end
+  end
 
   def latest_contribution
     if object.vendor_contributions.order('year DESC').first
