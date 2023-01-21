@@ -1,6 +1,6 @@
 class Api::V1::VendorsController < ApiController
   before_action :set_vendor, only: %i[show update destroy]
-  before_action :set_user, only: %i[vendors_by_assignment]
+  before_action :set_user, only: %i[vendors_by_assignment, download_csv]
 
   def index
     current_user.admin? ?
@@ -8,6 +8,26 @@ class Api::V1::VendorsController < ApiController
       @vendors = current_user.vendors
 
     render json: @vendors, status: :ok
+  end
+
+  def export_vendors
+    VendorExportJob.perform_async(current_user.id)
+
+    render json: { message: 'Exporting vendors' }, status: :ok
+  end
+
+  def download_csv
+    today = Date.today
+    user_id = current_user.id
+    file_path = "storage/downloads/vendor_export-#{today}-#{user_id}.csv"
+    if File.exist?(file_path)
+      send_file file_path,
+                type: 'text/csv',
+                disposition: 'attachment',
+                status: :ok
+    else
+      render json: { message: 'File not found' }, status: :not_found
+    end
   end
 
   def vendors_by_assignment

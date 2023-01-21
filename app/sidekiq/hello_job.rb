@@ -2,6 +2,8 @@ class HelloJob
   include Sidekiq::Job
 
   def perform(*args)
-    # Do something
+    vendors = Vendor.all
+
+    vendors.each { |vendor| puts vendor.name }
   end
 end

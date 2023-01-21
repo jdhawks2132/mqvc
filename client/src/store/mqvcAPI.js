@@ -32,7 +32,7 @@ export const mqvcAPI = createApi({
 		}),
 		signOut: builder.mutation({
 			query: () => ({
-				url: 'Users/sign_out',
+				url: 'users/sign_out',
 				method: 'DELETE',
 				body: {},
 				credentials: 'include',
@@ -50,6 +50,30 @@ export const mqvcAPI = createApi({
 			}),
 			invalidatesTags: ['Vendor'],
 		}),
+		exportVendors: builder.query({
+			query: () => ({
+				url: 'api/v1/export-vendors',
+				method: 'GET',
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+		}),
+		downloadCSV: builder.query({
+			query: () => ({
+				url: 'api/v1/download-csv',
+				method: 'GET',
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+				responseType: 'blob',
+				body: '',
+				onUploadProgress: (progressEvent) => {
+					const percentCompleted = Math.round(
+						(progressEvent.loaded * 100) / progressEvent.total
+					);
+					console.log(percentCompleted);
+				},
+			}),
+		}),
 	}),
 });
 
@@ -61,4 +85,6 @@ export const {
 	useContactQuery,
 	useSignOutMutation,
 	useCreateVendorMutation,
+	useExportVendorsQuery,
+	useDownloadCSVQuery,
 } = mqvcAPI;
