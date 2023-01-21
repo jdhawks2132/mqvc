@@ -10,6 +10,8 @@
 ![rails](https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
 ![postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![devise](https://img.shields.io/badge/Devise-7A00FF?style=for-the-badge&logo=devise&logoColor=white)
+![sidekiq](https://img.shields.io/badge/Sidekiq-7A00FF?style=for-the-badge&logo=sidekiq&logoColor=white)
+![redis](https://img.shields.io/badge/Redis-7A00FF?style=for-the-badge&logo=redis&logoColor=white)
 
 </div>
 
