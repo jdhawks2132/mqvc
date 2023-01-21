@@ -68,8 +68,4 @@ class Api::V1::ContactsController < ApiController
       :primary,
     )
   end
-
-  def vendor_contact_params
-    params.require(:vendor_contact).permit(:contact_id, :vendor_id)
-  end
 end
