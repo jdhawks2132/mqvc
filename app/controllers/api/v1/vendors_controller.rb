@@ -30,6 +30,17 @@ class Api::V1::VendorsController < ApiController
     end
   end
 
+  def import_vendors
+    file_path = params[:file].path
+
+    if file_path && File.exist?(file_path)
+      ImportVendorsJob.perform_async(file_path)
+      render json: { message: 'Importing vendors' }, status: :ok
+    else
+      render json: { message: 'File not found' }, status: :not_found
+    end
+  end
+
   def vendors_by_assignment
     current_user.admin? || @user == current_user ?
       @vendors = @user.vendors :

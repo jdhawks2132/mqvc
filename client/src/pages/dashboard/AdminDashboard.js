@@ -1,14 +1,44 @@
-import React from 'react';
+import { useState } from 'react';
 import { useVendorAssignmentsQuery } from '../../store/mqvcAPI';
+import axios from 'axios';
 
 const AdminDashboard = () => {
+	const [file, setFile] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
+
 	const {
 		data: vendorAssignments,
 		error,
 		isSuccess,
 	} = useVendorAssignmentsQuery();
 
-	console.log(vendorAssignments);
+	const handleFileChange = (e) => {
+		setFile(e.target.files[0]);
+	};
+
+	const handleUpload = async (e) => {
+		e.preventDefault();
+		setIsLoading(true);
+		const formData = new FormData();
+		formData.append('file', file);
+		try {
+			const res = await axios.post(
+				'http://localhost:3000/api/v1/import-vendors',
+				formData,
+				{
+					headers: {
+						'Content-Type': 'multipart/form-data',
+						Authorization: localStorage.getItem('jwt'),
+					},
+				}
+			);
+			console.log(res);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const UPLOAD_URL = 'http://localhost:3000/api/v1/import-vendors';
 	return (
 		<div>
 			<h1 className='text-2xl font-bold m-11'>Admin Dashboard</h1>
@@ -50,6 +80,18 @@ const AdminDashboard = () => {
 				</div>
 			)}
 			{error && <p>{error.message}</p>}
+			<form onSubmit={handleUpload}>
+				<input
+					type='file'
+					name='file'
+					onChange={handleFileChange}
+				/>
+				<button
+					type='submit'
+					disabled={isLoading}>
+					Upload
+				</button>
+			</form>
 		</div>
 	);
 };

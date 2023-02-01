@@ -95,6 +95,17 @@ export const mqvcAPI = createApi({
 			query: () => `api/v1/vendor_assignments`,
 			providesTags: ['Vendor'],
 		}),
+		uploadVendors: builder.mutation({
+			query: (file) => ({
+				url: 'api/v1/import-vendors',
+				method: 'POST',
+				body: file,
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+				invalidatesTags: ['Vendor'],
+			}),
+			invalidatesTags: ['Vendor'],
+		}),
 	}),
 });
 
@@ -111,4 +122,5 @@ export const {
 	useUpdateContactMutation,
 	useCreateVendorContactMutation,
 	useVendorAssignmentsQuery,
+	useUploadVendorsMutation,
 } = mqvcAPI;
