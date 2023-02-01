@@ -19,10 +19,7 @@ const AdminDashboard = () => {
 	const handleUpload = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
-		if (file.type !== 'text/csv') {
-			setIsLoading(false);
-			return alert('Please upload a csv file');
-		}
+		alert
 		const formData = new FormData();
 		formData.append('file', file);
 		try {
@@ -37,9 +34,7 @@ const AdminDashboard = () => {
 				}
 			);
 			console.log(res);
-			setIsLoading(false);
 		} catch (err) {
-			setIsLoading(false);
 			console.log(err);
 		}
 	};
