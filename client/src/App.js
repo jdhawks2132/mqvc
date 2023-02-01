@@ -92,7 +92,10 @@ function App() {
 								element={isAdmin ? <AdminDashboard /> : <Navigate to='/' />}
 							/>
 							{/* fallback route */}
-							<Route path='*' element={<Navigate to='/' />} />
+							<Route
+								path='*'
+								element={<Navigate to='/' />}
+							/>
 						</Routes>
 					</div>
 				</BrowserRouter>

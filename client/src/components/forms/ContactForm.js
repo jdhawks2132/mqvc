@@ -4,10 +4,13 @@ import { states, booleanOptions } from '../../utils/options';
 import {
 	useCreateContactMutation,
 	useCreateVendorContactMutation,
+	useCurrentUserQuery,
+	useUpdateContactMutation,
 } from '../../store/mqvcAPI';
 
 const ContactForm = ({ contact }) => {
 	const [isDisabled, setIsDisabled] = useState(true);
+	const [isUpdate, setIsUpdate] = useState(false);
 	const { vendorId } = useParams();
 	const navigate = useNavigate();
 
@@ -32,6 +35,11 @@ const ContactForm = ({ contact }) => {
 		});
 	};
 
+	const handleUpdateToggle = () => {
+		setIsDisabled(!isDisabled);
+		setIsUpdate(!isUpdate);
+	};
+
 	useEffect(() => {
 		if (!contact) {
 			setIsDisabled(false);
@@ -40,27 +48,48 @@ const ContactForm = ({ contact }) => {
 
 	const [createContact] = useCreateContactMutation();
 	const [createVendorContact] = useCreateVendorContactMutation();
+	const { data: currentUser } = useCurrentUserQuery();
+	const [updateContact] = useUpdateContactMutation();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const newContact = {
 			...formState,
 		};
-		const response = await createContact(newContact);
-		if (response && vendorId) {
-			const newVendorContact = {
-				vendor_id: parseInt(vendorId),
-				contact_id: response.data.id,
-			};
-			const response2 = await createVendorContact(newVendorContact);
-			if (response2) {
-				navigate(`/vendors/${vendorId}`);
+		if (isUpdate) {
+			const response = await updateContact({
+				id: contact.id,
+				...newContact,
+			});
+			if (response) {
+				navigate(`/vendors/${contact.vendors[0].id}`);
+			}
+		} else {
+			const response = await createContact(newContact);
+			if (response && vendorId) {
+				const newVendorContact = {
+					vendor_id: parseInt(vendorId),
+					contact_id: response.data.id,
+				};
+				const response2 = await createVendorContact(newVendorContact);
+				if (response2) {
+					navigate(`/vendors/${vendorId}`);
+				}
 			}
 		}
 	};
 
 	return (
 		<div>
+			{contact && currentUser.admin_level > 2 ? (
+				<button
+					className={`ml-11 mt-4 p-2 text-white rounded ${
+						isDisabled ? 'bg-green-700 ' : 'bg-red-700'
+					}`}
+					onClick={handleUpdateToggle}>
+					{isDisabled ? 'Click to Edit Contact' : 'Cancel Edit'}
+				</button>
+			) : null}
 			<form
 				onSubmit={handleSubmit}
 				className='w-3/4 ml-11 mt-4'>

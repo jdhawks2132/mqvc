@@ -70,6 +70,16 @@ export const mqvcAPI = createApi({
 			}),
 			invalidatesTags: ['Contact'],
 		}),
+		updateContact: builder.mutation({
+			query: ({ id, ...rest }) => ({
+				url: `api/v1/contacts/${id}`,
+				method: 'PUT',
+				body: rest,
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidatesTags: ['Contact', 'Vendor'],
+		}),
 		createVendorContact: builder.mutation({
 			query: (vendorContact) => ({
 				url: 'api/v1/contacts/create-vendor-contact',
@@ -94,5 +104,6 @@ export const {
 	useCreateVendorMutation,
 	useUpdateVendorMutation,
 	useCreateContactMutation,
+	useUpdateContactMutation,
 	useCreateVendorContactMutation,
 } = mqvcAPI;
