@@ -91,6 +91,10 @@ export const mqvcAPI = createApi({
 			}),
 			invalidatesTags: ['Vendor', 'Contact'],
 		}),
+		vendorAssignments: builder.query({
+			query: () => `api/v1/vendor_assignments`,
+			providesTags: ['Vendor'],
+		}),
 	}),
 });
 
@@ -106,4 +110,5 @@ export const {
 	useCreateContactMutation,
 	useUpdateContactMutation,
 	useCreateVendorContactMutation,
+	useVendorAssignmentsQuery,
 } = mqvcAPI;
