@@ -19,6 +19,10 @@ const AdminDashboard = () => {
 	const handleUpload = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
+		if (file.type !== 'text/csv') {
+			setIsLoading(false);
+			return alert('Please upload a csv file');
+		}
 		const formData = new FormData();
 		formData.append('file', file);
 		try {
@@ -33,7 +37,9 @@ const AdminDashboard = () => {
 				}
 			);
 			console.log(res);
+			setIsLoading(false);
 		} catch (err) {
+			setIsLoading(false);
 			console.log(err);
 		}
 	};
@@ -80,15 +86,21 @@ const AdminDashboard = () => {
 				</div>
 			)}
 			{error && <p>{error.message}</p>}
-			<form onSubmit={handleUpload}>
+			{/* style the form with tailwind css */}
+			<form
+				onSubmit={handleUpload}
+				className='flex flex-col items-center justify-center my-4'>
+				<h2 className='text-xl my-4'>Upload New Vendors Vendors</h2>
 				<input
 					type='file'
 					name='file'
 					onChange={handleFileChange}
+					className='border border-gray-300 rounded-md p-2'
 				/>
 				<button
 					type='submit'
-					disabled={isLoading}>
+					disabled={isLoading}
+					className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4'>
 					Upload
 				</button>
 			</form>
