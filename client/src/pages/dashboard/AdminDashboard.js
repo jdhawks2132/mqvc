@@ -19,7 +19,6 @@ const AdminDashboard = () => {
 	const handleUpload = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
-		alert
 		const formData = new FormData();
 		formData.append('file', file);
 		try {
