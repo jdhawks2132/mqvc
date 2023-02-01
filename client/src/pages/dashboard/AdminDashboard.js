@@ -23,7 +23,7 @@ const AdminDashboard = () => {
 		formData.append('file', file);
 		try {
 			const res = await axios.post(
-				'http://localhost:3000/api/v1/import-vendors',
+				'api/v1/import-vendors',
 				formData,
 				{
 					headers: {
