@@ -16,14 +16,6 @@ class Api::V1::VendorsController < ApiController
     render json: { message: 'Exporting vendors' }, status: :ok
   end
 
-  def vendor_test_email
-    SendMailersJob.perform_async(
-      'jdhawks@gmail.com',
-      'Test Email',
-      'Testing out Sidekiq',
-    )
-  end
-
   def download_csv
     today = Date.today
     user_id = current_user.id
