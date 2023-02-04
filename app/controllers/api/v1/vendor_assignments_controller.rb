@@ -2,7 +2,9 @@ class Api::V1::VendorAssignmentsController < ApiController
   before_action :set_vendor_assignment, only: %i[show update destroy]
 
   def index
-    render json: VendorAssignment.all, status: :ok
+    # order by id
+    render json: vendor_assignments = VendorAssignment.all.order(:id),
+           status: :ok
   end
 
   def show

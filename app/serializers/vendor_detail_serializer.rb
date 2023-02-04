@@ -16,9 +16,11 @@ class VendorDetailSerializer < ActiveModel::Serializer
              :vendor_type,
              :latest_contribution,
              :latest_registration,
-             :primary_contact
+             :primary_contact,
+             :assigned_admin
 
   has_many :users
+  has_many :vendor_assignments
   has_many :contacts
   has_many :contributions
   has_many :registrations
@@ -56,6 +58,24 @@ class VendorDetailSerializer < ActiveModel::Serializer
       object.contacts.where(primary: true).first
     elsif object.contacts.first
       object.contacts.first
+    else
+      nil
+    end
+  end
+
+  def assigned_admin
+    #  iterate through the vendor_assignments the users that are admins or read_only_admins
+    admin_assignment = {}
+    object.vendor_assignments.each do |assignment|
+      if assignment.user.admin? || assignment.user.read_only_admin?
+        admin_assignment[:admin_id] = assignment.user.id
+        admin_assignment[:vendor_assignment_id] = assignment.id
+        admin_assignment[:user_name] = assignment.user.first_name + ' ' +
+          assignment.user.last_name
+      end
+    end
+    if admin_assignment[:admin_id] && admin_assignment[:vendor_assignment_id]
+      admin_assignment
     else
       nil
     end
