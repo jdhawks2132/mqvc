@@ -19,7 +19,13 @@ class CsvImportVendorsService
       vendor_hash[:zip] = row['zip']
       vendor_hash[:country] = row['country']
       vendor_hash[:notes] = row['notes']
-      vendor_hash[:previous_participant] = row['previous_participant']
+      vendor_hash[:previous_participant] = (
+        if row['previous_participant'].to_s.downcase == 'true'
+          true
+        else
+          false
+        end
+      )
 
       unless vendor_hash.values.all? { |value| value.nil? || value.empty? }
         Vendor.create!(vendor_hash)
