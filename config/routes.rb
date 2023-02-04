@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/admin-users', to: 'members#admin_users'
   namespace :api do
     namespace :v1 do
+      resources :contributions
       resources :vendor_assignments
       resources :contacts
       post '/contacts/create-vendor-contact',
