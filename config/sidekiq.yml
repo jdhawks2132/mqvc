@@ -1,9 +1,17 @@
-:concurrency: 5
-:queues:
-  - default
-  - mailers
-  - low
+development:
+  :concurrency: <%= ENV['SIDEKIQ_CONCURRENCY'] || 5 %>
+  :queues:
+    - default
+    - low
+  :url: <%= ENV['REDIS_URL'] || 'redis://localhost:6379/0' %>
+  :logfile: log/sidekiq.log
+  :pidfile: tmp/pids/sidekiq.pid
 
-:url: <%= ENV['REDIS_URL'] %>
-:logfile: log/sidekiq.log
-:pidfile: tmp/pids/sidekiq.pid
+production:
+  :concurrency: <%= ENV['SIDEKIQ_CONCURRENCY'] || 5 %>
+  :queues:
+    - default
+    - low
+  :url: <%= ENV['REDIS_URL'] %>
+  :logfile: log/sidekiq.log
+  :pidfile: tmp/pids/sidekiq.pid
