@@ -14,6 +14,9 @@ export const mqvcAPI = createApi({
 			}),
 			providesTags: ['User'],
 		}),
+		tinyMceKey: builder.query({
+			query: () => 'api/v1/tiny-api',
+		}),
 		vendors: builder.query({
 			query: () => 'api/v1/vendors',
 			providesTags: ['Vendor'],
@@ -143,6 +146,7 @@ export const mqvcAPI = createApi({
 
 export const {
 	useCurrentUserQuery,
+	useTinyMceKeyQuery,
 	useVendorsQuery,
 	useVendorQuery,
 	useContactsQuery,

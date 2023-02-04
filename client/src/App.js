@@ -13,6 +13,7 @@ import ContactDetails from './pages/details/ContactDetails';
 import CreateVendor from './pages/create/CreateVendor';
 import CreateContact from './pages/create/CreateContact';
 import AdminDashboard from './pages/dashboard/AdminDashboard';
+import Mailers from './pages/mailers/Mailers';
 
 function App() {
 	const [authIsReady, setAuthIsReady] = useState(false);
@@ -90,6 +91,10 @@ function App() {
 							<Route
 								path='/admin'
 								element={isAdmin ? <AdminDashboard /> : <Navigate to='/' />}
+							/>
+							<Route
+								path='/mailers'
+								element={isAdmin ? <Mailers /> : <Navigate to='/' />}
 							/>
 							{/* fallback route */}
 							<Route
