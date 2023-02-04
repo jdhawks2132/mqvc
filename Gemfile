@@ -59,3 +59,5 @@ gem "active_model_serializers", "~> 0.10.13"
 gem "pg", "~> 1.4"
 
 gem "sidekiq", "~> 7.0"
+
+gem "sendgrid-ruby", "~> 6.6"

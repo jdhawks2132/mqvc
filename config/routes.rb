@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       # add the export_vendors route
       get '/export-vendors', to: 'vendors#export_vendors'
       get '/download-csv', to: 'vendors#download_csv'
+      get '/test-email', to: 'vendors#vendor_test_email'
       # add the import_vendors route
       post '/import-vendors', to: 'vendors#import_vendors'
       resources :users, only: [:index]
