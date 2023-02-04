@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const mqvcAPI = createApi({
 	reducerPath: 'api',
 	baseQuery: fetchBaseQuery({ baseUrl: '/' }),
-	tagTypes: ['User', 'Vendor', 'Contact'],
+	tagTypes: ['User', 'Vendor', 'Contact', 'Mailer'],
 	endpoints: (builder) => ({
 		currentUser: builder.query({
 			query: () => ({
@@ -141,6 +141,43 @@ export const mqvcAPI = createApi({
 			query: () => 'api/v1/admin-users-list',
 			providesTags: ['Vendor'],
 		}),
+		mailers: builder.query({
+			query: () => 'api/v1/mailers',
+			providesTags: ['Mailer'],
+		}),
+		mailer: builder.query({
+			query: (id) => `api/v1/mailers/${id}`,
+			providesTags: ['Mailer'],
+		}),
+		createMailer: builder.mutation({
+			query: (mailer) => ({
+				url: 'api/v1/mailers',
+				method: 'POST',
+				body: mailer,
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidatesTags: ['Mailer'],
+		}),
+		updateMailer: builder.mutation({
+			query: ({ id, ...rest }) => ({
+				url: `api/v1/mailers/${id}`,
+				method: 'PUT',
+				body: rest,
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidatesTags: ['Mailer'],
+		}),
+		deleteMailer: builder.mutation({
+			query: (id) => ({
+				url: `api/v1/mailers/${id}`,
+				method: 'DELETE',
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidatesTags: ['Mailer'],
+		}),
 	}),
 });
 
@@ -163,4 +200,9 @@ export const {
 	useUpdateVendorAssignmentMutation,
 	useDeleteVendorAssignmentMutation,
 	useAdminUsersQuery,
+	useMailersQuery,
+	useMailerQuery,
+	useCreateMailerMutation,
+	useUpdateMailerMutation,
+	useDeleteMailerMutation,
 } = mqvcAPI;

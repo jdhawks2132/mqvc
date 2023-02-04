@@ -23,6 +23,9 @@ Rails.application.routes.draw do
 
       resources :registrations
       resources :vendor_registrations
+
+      resources :mailers
+
       resources :contacts
       post '/contacts/create-vendor-contact',
            to: 'contacts#create_vendor_contact'
@@ -34,7 +37,6 @@ Rails.application.routes.draw do
       resources :users, only: [:index]
       get '/admin-users-list', to: 'users#admin_users_list'
       get '/vendors_by_assignment', to: 'vendors#vendors_by_assignment'
-      # tinymce api route
       get '/tiny-api', to: 'api_keys#tiny_api'
     end
   end

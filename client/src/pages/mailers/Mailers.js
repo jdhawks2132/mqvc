@@ -1,18 +1,29 @@
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
 import { useTinyMceKeyQuery } from '../../store/mqvcAPI';
+import { useMailersQuery, useCreateMailerMutation } from '../../store/mqvcAPI';
 
 const Mailers = () => {
 	const editorRef = useRef(null);
 
 	const { data: tinyMceKey, isSuccess, isLoading } = useTinyMceKeyQuery();
+	const { data: mailers, isSuccess: mailersSuccess } = useMailersQuery();
+	const [createMailer, { isLoading: isCreating }] = useCreateMailerMutation();
 
 	const [subject, setSubject] = useState('');
 	const [body, setBody] = useState('');
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(subject, body);
+		if (subject !== '' && body !== '') {
+			createMailer({
+				subject,
+				body,
+			});
+		}
+		setSubject('');
+		setBody('');
 	};
 
 	const handleBodyChange = (e) => {
@@ -21,9 +32,26 @@ const Mailers = () => {
 
 	return (
 		<div className='p-11'>
+			<h2 className='text-2xl font-bold my-4'>Existing Mailers:</h2>
+			<div className='flex flex-col gap-4'>
+				{mailersSuccess &&
+					mailers.map((mailer) => (
+						// style like cards with tailwindcss
+						<Link
+							to={`/mailers/${mailer.id}`}
+							key={mailer.id}
+							className='flex bg-slate-100 m-4 p-4 rounded-md shadow-sm'>
+							<h2 className='text-xl font-bold border-x mr-4 pr-4'>
+								{mailer.subject}
+							</h2>
+							<p>{mailer.body.slice(0, 100) + '...'}</p>
+						</Link>
+					))}
+			</div>
 			{isLoading && <div>Loading...</div>}
 			{tinyMceKey && isSuccess && (
 				<div>
+					<h2 className='text-2xl font-bold my-4'>Create a Mailer:</h2>
 					<form
 						onSubmit={handleSubmit}
 						className='flex flex-col gap-4'>
@@ -40,6 +68,7 @@ const Mailers = () => {
 							id='subject'
 							placeholder='Subject'
 							value={subject}
+							required
 							onChange={(e) => setSubject(e.target.value)}
 						/>
 						<label
