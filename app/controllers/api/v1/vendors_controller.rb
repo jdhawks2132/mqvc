@@ -31,13 +31,14 @@ class Api::V1::VendorsController < ApiController
   end
 
   def import_vendors
-    file_path = params[:file].path
+    if params[:file].present?
+      file = params[:file]
 
-    if file_path && File.exist?(file_path)
-      ImportVendorsJob.perform_async(file_path)
-      render json: { message: 'Importing vendors' }, status: :ok
+      CsvImportVendorsService.new.call(file)
+
+      render json: { message: 'Vendors imported' }, status: :ok
     else
-      render json: { message: 'File not found' }, status: :not_found
+      render json: { message: 'No file found' }, status: :not_found
     end
   end
 
