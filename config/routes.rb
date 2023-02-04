@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :contributions
       resources :vendor_contributions
+
+      resources :registrations
+      resources :vendor_registrations
       resources :contacts
       post '/contacts/create-vendor-contact',
            to: 'contacts#create_vendor_contact'
