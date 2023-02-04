@@ -11,7 +11,7 @@ const ContactDetails = () => {
 
 	return (
 		<div>
-			<h1>Contact Details</h1>
+			<h2 className='text-2xl font-bold m-11'>Contact Details</h2>
 			{data && <ContactForm contact={data} />}
 			{loading && <p>Loading...</p>}
 			{error && <p>Error: {error}</p>}
