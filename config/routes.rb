@@ -19,15 +19,14 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :contributions
-      resources :vendor_assignments
+      resources :vendor_contributions
       resources :contacts
       post '/contacts/create-vendor-contact',
            to: 'contacts#create_vendor_contact'
       resources :vendors
-      # add the export_vendors route
       get '/export-vendors', to: 'vendors#export_vendors'
       get '/download-csv', to: 'vendors#download_csv'
-      # add the import_vendors route
+      resources :vendor_assignments
       post '/import-vendors', to: 'vendors#import_vendors'
       resources :users, only: [:index]
       get '/vendors_by_assignment', to: 'vendors#vendors_by_assignment'
