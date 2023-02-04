@@ -60,6 +60,16 @@ export const mqvcAPI = createApi({
 			}),
 			invalidatesTags: ['Vendor'],
 		}),
+		uploadVendors: builder.mutation({
+			query: (file) => ({
+				url: 'api/v1/import-vendors',
+				method: 'POST',
+				body: file,
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidatesTags: ['Vendor'],
+		}),
 		createContact: builder.mutation({
 			query: (contact) => ({
 				url: 'api/v1/contacts',
@@ -95,16 +105,38 @@ export const mqvcAPI = createApi({
 			query: () => `api/v1/vendor_assignments`,
 			providesTags: ['Vendor'],
 		}),
-		uploadVendors: builder.mutation({
-			query: (file) => ({
-				url: 'api/v1/import-vendors',
+		createVendorAssignment: builder.mutation({
+			query: (vendorAssignment) => ({
+				url: 'api/v1/vendor_assignments',
 				method: 'POST',
-				body: file,
+				body: vendorAssignment,
 				credentials: 'include',
 				headers: { Authorization: localStorage.getItem('jwt') },
-				invalidatesTags: ['Vendor'],
 			}),
 			invalidatesTags: ['Vendor'],
+		}),
+		updateVendorAssignment: builder.mutation({
+			query: ({ id, ...rest }) => ({
+				url: `api/v1/vendor_assignments/${id}`,
+				method: 'PUT',
+				body: rest,
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidatesTags: ['Vendor'],
+		}),
+		deleteVendorAssignment: builder.mutation({
+			query: (id) => ({
+				url: `api/v1/vendor_assignments/${id}`,
+				method: 'DELETE',
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidatesTags: ['Vendor'],
+		}),
+		adminUsers: builder.query({
+			query: () => 'api/v1/admin-users-list',
+			providesTags: ['Vendor'],
 		}),
 	}),
 });
@@ -123,4 +155,8 @@ export const {
 	useCreateVendorContactMutation,
 	useVendorAssignmentsQuery,
 	useUploadVendorsMutation,
+	useCreateVendorAssignmentMutation,
+	useUpdateVendorAssignmentMutation,
+	useDeleteVendorAssignmentMutation,
+	useAdminUsersQuery,
 } = mqvcAPI;
