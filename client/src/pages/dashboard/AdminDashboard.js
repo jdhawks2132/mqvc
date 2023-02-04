@@ -1,16 +1,23 @@
 import { useState } from 'react';
-import { useVendorAssignmentsQuery } from '../../store/mqvcAPI';
-import axios from 'axios';
+import {
+	useVendorAssignmentsQuery,
+	useUploadVendorsMutation,
+} from '../../store/mqvcAPI';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
 	const [file, setFile] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
+
+	const navigate = useNavigate();
 
 	const {
 		data: vendorAssignments,
 		error,
 		isSuccess,
 	} = useVendorAssignmentsQuery();
+
+	const [uploadVendors] = useUploadVendorsMutation();
 
 	const handleFileChange = (e) => {
 		setFile(e.target.files[0]);
@@ -22,23 +29,14 @@ const AdminDashboard = () => {
 		const formData = new FormData();
 		formData.append('file', file);
 		try {
-			const res = await axios.post(
-				'api/v1/import-vendors',
-				formData,
-				{
-					headers: {
-						'Content-Type': 'multipart/form-data',
-						Authorization: localStorage.getItem('jwt'),
-					},
-				}
-			);
-			console.log(res);
-		} catch (err) {
-			console.log(err);
+			uploadVendors(formData);
+			setIsLoading(false);
+			navigate('/dashboard');
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
-	const UPLOAD_URL = 'http://localhost:3000/api/v1/import-vendors';
 	return (
 		<div>
 			<h1 className='text-2xl font-bold m-11'>Admin Dashboard</h1>
