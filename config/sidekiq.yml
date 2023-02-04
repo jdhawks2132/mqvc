@@ -3,3 +3,7 @@
   - default
   - mailers
   - low
+
+:url: <%= ENV['REDIS_URL'] %>
+:logfile: log/sidekiq.log
+:pidfile: tmp/pids/sidekiq.pid
