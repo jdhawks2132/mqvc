@@ -1,4 +1,4 @@
-class Api::V1::VendorRegistrationsController < ApplicationController
+class Api::V1::VendorRegistrationsController < ApiController
   def index
     render json: VendorRegistration.all, status: :ok
   end

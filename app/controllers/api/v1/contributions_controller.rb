@@ -1,4 +1,4 @@
-class Api::V1::ContributionsController < ApplicationController
+class Api::V1::ContributionsController < ApiController
   before_action :set_contribution, only: %i[show update delete]
 
   def index

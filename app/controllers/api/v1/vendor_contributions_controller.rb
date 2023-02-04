@@ -1,4 +1,4 @@
-class Api::V1::VendorContributionsController < ApplicationController
+class Api::V1::VendorContributionsController < ApiController
   before_action :set_vendor_contribution, only: %i[show update delete]
 
   def index

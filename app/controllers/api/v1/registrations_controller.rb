@@ -1,4 +1,4 @@
-class Api::V1::RegistrationsController < ApplicationController
+class Api::V1::RegistrationsController < ApiController
   before_action :set_registration, only: %i[show update delete]
 
   def index
