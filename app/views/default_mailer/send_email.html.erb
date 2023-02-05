@@ -7,7 +7,7 @@
     </style>
   </head>
   <body>
-  <h2>Layouts/mailer</h2>
-    <%= yield %>
+    <%# render the body contents as html %>
+    <%= @body.html_safe %>
   </body>
 </html>

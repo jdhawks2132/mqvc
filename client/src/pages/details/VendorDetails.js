@@ -1,5 +1,9 @@
-import React from 'react';
-import { useVendorQuery, useCurrentUserQuery } from '../../store/mqvcAPI';
+import { useState } from 'react';
+import {
+	useVendorQuery,
+	useCurrentUserQuery,
+	useMailersQuery,
+} from '../../store/mqvcAPI';
 import { useParams, Link } from 'react-router-dom';
 
 import VendorForm from '../../components/forms/VendorForm';
@@ -10,6 +14,14 @@ const VendorDetails = () => {
 
 	const { data: vendor, isSuccess } = useVendorQuery(id);
 	const { data: currentUser } = useCurrentUserQuery();
+	const { data: mailers } = useMailersQuery();
+
+	const [vendorMailer, setVendorMailer] = useState({
+		mailer_id: null,
+		vendor_id: id,
+		registration_id: null,
+		contribution_id: null,
+	});
 
 	return (
 		<div>
@@ -51,6 +63,20 @@ const VendorDetails = () => {
 								)}
 							</>
 						</div>
+					</div>
+					<div className='mx-auto'>
+						<h2 className='text-2xl font-bold ml-11 mb-2 my-4'>Mailers</h2>
+						<h3 className='text-xl font-bold ml-11'>Sent Mailers:</h3>
+						{vendor?.vendor_mailers.length > 0 && (
+							<div className='flex ml-11 '>
+								{vendor?.vendor_mailers.map((mailer) => (
+									<div className='flex flex-col justify-center items-center m-3 p-4 bg-white shadow-md rounded-sm'>
+										<p className='text-md'>{mailer.subject}</p>
+										<p className='text-sm'>{mailer.sent}</p>
+									</div>
+								))}
+							</div>
+						)}
 					</div>
 				</div>
 			)}

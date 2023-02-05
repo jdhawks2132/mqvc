@@ -1,4 +1,3 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
-  layout "mailer"
+  default from: 'hawks.dev.test@example.com'
 end

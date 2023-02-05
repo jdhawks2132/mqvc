@@ -48,6 +48,8 @@ const Dashboard = ({ currentUser }) => {
 		setVendors(filteredVendors);
 	};
 
+	console.log(vendors);
+
 	const handleSearch = (e) => {
 		const { value } = e.target;
 		const filteredVendors = data.filter((vendor) =>
@@ -67,10 +69,11 @@ const Dashboard = ({ currentUser }) => {
 							name='status'
 							id='vendor_status'
 							onChange={handleFilterChange}
-							value={filters.status}
-						>
+							value={filters.status}>
 							{vendorStatusFilters.map((filter) => (
-								<option key={filter.value} value={filter.value}>
+								<option
+									key={filter.value}
+									value={filter.value}>
 									{filter.label}
 								</option>
 							))}
@@ -80,10 +83,11 @@ const Dashboard = ({ currentUser }) => {
 							name='vendor_type'
 							id='vendor_type'
 							onChange={handleFilterChange}
-							value={filters.vendor_type}
-						>
+							value={filters.vendor_type}>
 							{vendorTypeFilters.map((filter) => (
-								<option key={filter.value} value={filter.value}>
+								<option
+									key={filter.value}
+									value={filter.value}>
 									{filter.label}
 								</option>
 							))}
@@ -93,8 +97,7 @@ const Dashboard = ({ currentUser }) => {
 							// reset filters and set options back to default
 							onClick={() => {
 								setFilters({ status: '', vendor_type: '' });
-							}}
-						>
+							}}>
 							Reset Filters
 						</button>
 						<button
@@ -103,8 +106,7 @@ const Dashboard = ({ currentUser }) => {
 							onClick={() => {
 								setFilters({ status: '', vendor_type: '' });
 								setToggleSearch(true);
-							}}
-						>
+							}}>
 							Search by Vendor Name
 						</button>
 					</>
@@ -119,16 +121,14 @@ const Dashboard = ({ currentUser }) => {
 						/>
 						<button
 							type='submit'
-							className='absolute right-0 top-0 mt-5 mr-4'
-						></button>
+							className='absolute right-0 top-0 mt-5 mr-4'></button>
 						<button
 							className='ml-4 bg-purple-700 text-white py-1 px-2 rounded hover:bg-purple-800'
 							// reset filters and set options back to default
 							onClick={() => {
 								setFilters({ status: '', vendor_type: '' });
 								setToggleSearch(false);
-							}}
-						>
+							}}>
 							Filter by Status and Type
 						</button>
 					</div>
@@ -150,7 +150,10 @@ const Dashboard = ({ currentUser }) => {
 					</thead>
 					<tbody>
 						{vendors.map((vendor) => (
-							<DashboardReadOnly key={vendor.id} vendor={vendor} />
+							<DashboardReadOnly
+								key={vendor.id}
+								vendor={vendor}
+							/>
 						))}
 					</tbody>
 				</table>

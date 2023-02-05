@@ -4,8 +4,8 @@ class Api::V1::VendorsController < ApiController
 
   def index
     current_user.admin? ?
-      @vendors = Vendor.all :
-      @vendors = current_user.vendors
+      @vendors = Vendor.all.order(:id) :
+      @vendors = current_user.vendors.order(:id)
 
     render json: @vendors, status: :ok
   end
@@ -55,6 +55,16 @@ class Api::V1::VendorsController < ApiController
              },
              status: :unauthorized
     end
+  end
+
+  def email_vendor
+    vendor = Vendor.find(params[:vendor_id])
+    mailer = Mailer.find(params[:mailer_id])
+
+    VendorMailer.create!(vendor: vendor, mailer: mailer)
+    SendMailersJob.perform_async(vendor.id, mailer.id)
+
+    render json: { message: 'Emailing vendor' }, status: :ok
   end
 
   def show

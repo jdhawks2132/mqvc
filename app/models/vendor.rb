@@ -11,6 +11,8 @@ class Vendor < ApplicationRecord
   has_many :vendor_assignments, dependent: :destroy
   has_many :users, through: :vendor_assignments
 
+  has_many :vendor_mailers, dependent: :destroy
+
   # vendor validations
 
   validates :name, presence: true, uniqueness: true

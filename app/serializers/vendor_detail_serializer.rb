@@ -24,6 +24,7 @@ class VendorDetailSerializer < ActiveModel::Serializer
   has_many :contacts
   has_many :contributions
   has_many :registrations
+  has_many :vendor_mailers
 
   def previous_participant_conversion
     # convert the postgresql boolean to a ruby boolean
@@ -78,6 +79,23 @@ class VendorDetailSerializer < ActiveModel::Serializer
       admin_assignment
     else
       nil
+    end
+  end
+
+  # include the with each vendor_mailer.name
+
+  def vendor_mailers
+    object.vendor_mailers.map do |vendor_mailer|
+      {
+        id: vendor_mailer.id,
+        sent:
+          vendor_mailer
+            .created_at
+            .in_time_zone('Central Time (US & Canada)')
+            .strftime('%m/%d/%Y %l:%M %P'),
+        subject: vendor_mailer.mailer.subject,
+        mailer_id: vendor_mailer.mailer.id,
+      }
     end
   end
 end

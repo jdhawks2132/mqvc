@@ -35,7 +35,7 @@ const Mailers = () => {
 			<h2 className='text-2xl font-bold my-4'>Existing Mailers:</h2>
 			<div className='flex flex-col gap-4'>
 				{mailersSuccess &&
-					mailers.map((mailer) => (
+					mailers?.map((mailer) => (
 						// style like cards with tailwindcss
 						<Link
 							to={`/mailers/${mailer.id}`}

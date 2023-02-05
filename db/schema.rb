@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_04_203422) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_05_002708) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -161,6 +161,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_203422) do
     t.index ["vendor_id"], name: "index_vendor_contributions_on_vendor_id"
   end
 
+  create_table "vendor_mailers", force: :cascade do |t|
+    t.bigint "vendor_id", null: false
+    t.bigint "mailer_id", null: false
+    t.bigint "vendor_contribution_id"
+    t.bigint "vendor_registration_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mailer_id"], name: "index_vendor_mailers_on_mailer_id"
+    t.index ["vendor_contribution_id"], name: "index_vendor_mailers_on_vendor_contribution_id"
+    t.index ["vendor_id"], name: "index_vendor_mailers_on_vendor_id"
+    t.index ["vendor_registration_id"], name: "index_vendor_mailers_on_vendor_registration_id"
+  end
+
   create_table "vendor_registrations", force: :cascade do |t|
     t.bigint "vendor_id", null: false
     t.bigint "registration_id", null: false
@@ -203,6 +216,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_203422) do
   add_foreign_key "vendor_contacts", "vendors"
   add_foreign_key "vendor_contributions", "contributions"
   add_foreign_key "vendor_contributions", "vendors"
+  add_foreign_key "vendor_mailers", "mailers"
+  add_foreign_key "vendor_mailers", "vendor_contributions"
+  add_foreign_key "vendor_mailers", "vendor_registrations"
+  add_foreign_key "vendor_mailers", "vendors"
   add_foreign_key "vendor_registrations", "registrations"
   add_foreign_key "vendor_registrations", "vendors"
 end

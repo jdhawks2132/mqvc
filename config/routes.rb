@@ -32,6 +32,8 @@ Rails.application.routes.draw do
       resources :vendors
       get '/export-vendors', to: 'vendors#export_vendors'
       get '/download-csv', to: 'vendors#download_csv'
+      get '/email-vendor/:vendor_id/mailers/:mailer_id',
+          to: 'vendors#email_vendor'
       resources :vendor_assignments
       post '/import-vendors', to: 'vendors#import_vendors'
       resources :users, only: [:index]
