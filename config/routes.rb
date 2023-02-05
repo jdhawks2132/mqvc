@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resources :vendor_registrations
 
       resources :mailers
+      post '/mailers/send-mass-email', to: 'mailers#send_mass_email'
 
       resources :contacts
       post '/contacts/create-vendor-contact',

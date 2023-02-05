@@ -67,14 +67,20 @@ const VendorDetails = () => {
 					<div className='mx-auto'>
 						<h2 className='text-2xl font-bold ml-11 mb-2 my-4'>Mailers</h2>
 						<h3 className='text-xl font-bold ml-11'>Sent Mailers:</h3>
-						{vendor?.vendor_mailers.length > 0 && (
+						{vendor?.vendor_mailers.length > 0 ? (
 							<div className='flex ml-11 '>
 								{vendor?.vendor_mailers.map((mailer) => (
-									<div className='flex flex-col justify-center items-center m-3 p-4 bg-white shadow-md rounded-sm'>
+									<div
+										key={mailer.id}
+										className='flex flex-col justify-center items-center m-3 p-4 bg-white shadow-md rounded-sm'>
 										<p className='text-md'>{mailer.subject}</p>
 										<p className='text-sm'>{mailer.sent}</p>
 									</div>
 								))}
+							</div>
+						) : (
+							<div className='flex flex-col justify-center items-center ml-11 p-4 bg-white shadow-md rounded-sm w-1/6'>
+								<p className='text-md'>No Mailers Sent</p>
 							</div>
 						)}
 					</div>

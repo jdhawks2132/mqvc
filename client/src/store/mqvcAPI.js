@@ -184,6 +184,16 @@ export const mqvcAPI = createApi({
 				providesTags: ['Mailer', 'Vendor'],
 			}),
 		}),
+		sendMassEmail: builder.mutation({
+			query: (mailerInfo) => ({
+				url: `api/v1/mailers/send-mass-email`,
+				method: 'POST',
+				body: mailerInfo,
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidatesTags: ['Mailer', 'Vendor'],
+		}),
 	}),
 });
 
@@ -211,4 +221,5 @@ export const {
 	useCreateMailerMutation,
 	useUpdateMailerMutation,
 	useDeleteMailerMutation,
+	useSendMassEmailMutation,
 } = mqvcAPI;

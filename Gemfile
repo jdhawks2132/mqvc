@@ -61,3 +61,5 @@ gem "pg", "~> 1.4"
 gem "sidekiq", "~> 7.0"
 
 gem "sendgrid-ruby", "~> 6.6"
+
+gem "pry", "~> 0.14.2"

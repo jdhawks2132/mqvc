@@ -61,7 +61,6 @@ class Api::V1::VendorsController < ApiController
     vendor = Vendor.find(params[:vendor_id])
     mailer = Mailer.find(params[:mailer_id])
 
-    VendorMailer.create!(vendor: vendor, mailer: mailer)
     SendMailersJob.perform_async(vendor.id, mailer.id)
 
     render json: { message: 'Emailing vendor' }, status: :ok
