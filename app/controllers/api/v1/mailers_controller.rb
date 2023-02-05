@@ -40,7 +40,7 @@ class Api::V1::MailersController < ApiController
     puts vendor_ids
     puts mailer_id
 
-    if vendor_ids && mailer_id
+    if vendor_ids && mailer_id && current_user.admin?
       vendor_ids.each do |vendor_id|
         SendMailersJob.perform_async(vendor_id, mailer_id)
       end
