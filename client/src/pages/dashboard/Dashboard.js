@@ -41,8 +41,6 @@ const Dashboard = ({ currentUser }) => {
 		setFilters({ ...filters, [name]: value });
 	};
 
-	console.log(selectedMailer, selectedVendors);
-
 	// create options of the existing mailers for the mass email modal
 	const mailerOptions = mailers?.map((mailer) => ({
 		id: mailer.id,
@@ -74,7 +72,6 @@ const Dashboard = ({ currentUser }) => {
 		setSelectedVendors(filteredVendors);
 	};
 
-	console.log(currentUser);
 	const handleSearch = (e) => {
 		const { value } = e.target;
 		const filteredVendors = data.filter((vendor) =>

@@ -57,7 +57,6 @@ const VendorForm = ({ vendor }) => {
 		id: vendor?.assigned_admin?.vendor_assignment_id || null,
 		assigned_user: vendor?.assigned_admin?.admin_id || null,
 	});
-	console.log(vendorAssignment);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
