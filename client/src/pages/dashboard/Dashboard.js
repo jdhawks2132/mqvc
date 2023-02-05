@@ -74,6 +74,7 @@ const Dashboard = ({ currentUser }) => {
 		setSelectedVendors(filteredVendors);
 	};
 
+	console.log(currentUser);
 	const handleSearch = (e) => {
 		const { value } = e.target;
 		const filteredVendors = data.filter((vendor) =>
@@ -158,11 +159,13 @@ const Dashboard = ({ currentUser }) => {
 							Search by Vendor Name
 						</button>
 						{/* toggle the mass email modal */}
-						<button
-							className='ml-4 bg-green-500 text-white py-1 px-2 rounded hover:bg-green-800'
-							onClick={handleToggleModal}>
-							Mass Email
-						</button>
+						{currentUser && currentUser.admin_level > 2 ? (
+							<button
+								className='ml-4 bg-green-500 text-white py-1 px-2 rounded hover:bg-green-800'
+								onClick={handleToggleModal}>
+								Mass Email
+							</button>
+						) : null}
 					</>
 				) : (
 					<div className='ml-11'>
