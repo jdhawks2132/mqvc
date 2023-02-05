@@ -64,6 +64,8 @@ Frontend
 - RTK Query
 - Axios (for setting jwt token in headers)
 - TailwindCSS
+- TinyMCE (for rich text editing)
+
 
 Backend
 
@@ -74,6 +76,7 @@ Backend
 - Devise-jwt (for authentication)
 - Sidekiq (for background jobs)
 - Redis (for Sidekiq)
+- SendGrid (for sending emails)
 
 ## Installation
 

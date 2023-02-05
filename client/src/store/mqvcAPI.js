@@ -178,6 +178,12 @@ export const mqvcAPI = createApi({
 			}),
 			invalidatesTags: ['Mailer'],
 		}),
+		emailVendor: builder.query({
+			query: (vendorId, mailerId) => ({
+				url: `api/v1/email-vendors/${vendorId}/mailers/${mailerId}`,
+				providesTags: ['Mailer', 'Vendor'],
+			}),
+		}),
 	}),
 });
 
