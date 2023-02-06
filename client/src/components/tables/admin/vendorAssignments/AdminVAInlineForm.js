@@ -16,8 +16,6 @@ const AdminVAInlineForm = ({
 		</option>
 	));
 
-	console.log(vendorAssignment);
-
 	return (
 		<tr
 			key={vendorAssignment.id}

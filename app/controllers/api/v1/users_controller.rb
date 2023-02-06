@@ -8,7 +8,13 @@ class Api::V1::UsersController < ApiController
 
   def admin_users_list
     if current_user.admin?
-      admin_users = User.all.each { |user| user if user.admin? }
+      # iterate through all users. Check to see if they have a role assigned, if so check to see if that user is user.admin? if so add them to the array
+      admin_users = []
+      User.all.each do |user|
+        if user.role
+          admin_users << user if user.admin? || user.read_only_admin?
+        end
+      end
       render json: admin_users, status: :ok
     else
       render json: { error: 'Not authorized' }, status: :unauthorized

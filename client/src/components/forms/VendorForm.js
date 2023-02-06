@@ -417,7 +417,7 @@ const VendorForm = ({ vendor }) => {
 								}}
 								disabled={isDisabled}>
 								<option defaultValue={vendor?.assigned_admin?.admin_id || ''}>
-									{vendor?.assigned_admin?.user_name || 'Select Vendor'}
+									{vendor?.assigned_admin?.user_name || 'Select Admin'}
 								</option>
 								{adminUserOptions?.map((opts, index) => (
 									<option
