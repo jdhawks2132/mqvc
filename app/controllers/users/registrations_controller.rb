@@ -3,13 +3,14 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
-  private
-
-  def respond_with(resource, options = {})
-    register_success && return if resource.persisted?
-
-    register_failed
+  def create
+    super do |resource|
+      role = Role.find_by(id: 1)
+      UserRole.create(user_id: resource.id, role_id: role.id)
+    end
   end
+
+  private
 
   def register_success
     render json: {
