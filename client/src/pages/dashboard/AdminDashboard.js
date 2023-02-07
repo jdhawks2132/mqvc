@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import AdminVendorAssignmentsTable from '../../components/tables/admin/vendorAssignments/AdminVendorAssignmentsTable';
 import ContributionForm from '../../components/forms/ContributionForm';
 import RegistrationForm from '../../components/forms/RegistrationForm';
+import VendorManagementTable from '../../components/tables/admin/vendorManagement/VendorManagementTable';
 
 const AdminDashboard = () => {
 	const [file, setFile] = useState(null);
@@ -74,6 +75,12 @@ const AdminDashboard = () => {
 				</div>
 				<div className='registration'>
 					<RegistrationForm />
+				</div>
+				<div className='vendor-mng'>
+					<h2 className='text-xl my-4 text-center'>
+						Vendor Registrations and Contributions
+					</h2>
+					<VendorManagementTable />
 				</div>
 			</div>
 		</div>

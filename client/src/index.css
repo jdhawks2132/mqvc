@@ -12,8 +12,8 @@
 	max-width: 100%;
 	grid-template-areas:
 		'import contribution registration'
-		'assign vendor_cont vendor_reg'
-		'assign vendor_cont vendor_reg';
+		'assign vendor-mng vendor-mng'
+		'assign vendor-mng vendor-mng';
 }
 
 .import {
@@ -37,12 +37,7 @@
 	background: #fff;
 }
 
-.vendor_cont {
-	grid-area: vendor_cont;
-	background: #fff;
-}
-
-.vendor_reg {
-	grid-area: vendor_reg;
+.vendor-mng {
+	grid-area: vendor-mng;
 	background: #fff;
 }

@@ -56,9 +56,7 @@ const AdminVendorAssignmentsTable = ({ vendorAssignments }) => {
 					<thead>
 						<tr>
 							<th className='px-4 py-2'>Vendor</th>
-
 							<th className='px-4 py-2'>User Assigned To</th>
-
 							<th className='px-4 py-2'>Actions</th>
 						</tr>
 					</thead>

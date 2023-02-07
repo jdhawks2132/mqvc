@@ -11,6 +11,8 @@ class VendorSerializer < ActiveModel::Serializer
 
   has_many :users
   has_many :vendor_assignments
+  has_many :vendor_contributions
+  has_many :vendor_registrations
 
   def primary_contact
     # where contact.primary = true OR the first contact OR nil
