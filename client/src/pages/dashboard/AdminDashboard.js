@@ -5,6 +5,8 @@ import {
 } from '../../store/mqvcAPI';
 import { useNavigate } from 'react-router-dom';
 import AdminVendorAssignmentsTable from '../../components/tables/admin/vendorAssignments/AdminVendorAssignmentsTable';
+import ContributionForm from '../../components/forms/ContributionForm';
+import RegistrationForm from '../../components/forms/RegistrationForm';
 
 const AdminDashboard = () => {
 	const [file, setFile] = useState(null);
@@ -41,28 +43,39 @@ const AdminDashboard = () => {
 	return (
 		<div>
 			<h1 className='text-2xl font-bold m-11'>Admin Dashboard</h1>
-			{isSuccess && (
-				<AdminVendorAssignmentsTable vendorAssignments={vendorAssignments} />
-			)}
-			{error && <p>{error.message}</p>}
-			{/* style the form with tailwind css */}
-			<form
-				onSubmit={handleUpload}
-				className='flex flex-col items-center justify-center my-4'>
-				<h2 className='text-xl my-4'>Upload New Vendors Vendors</h2>
-				<input
-					type='file'
-					name='file'
-					onChange={handleFileChange}
-					className='border border-gray-300 rounded-md p-2'
-				/>
-				<button
-					type='submit'
-					disabled={isLoading}
-					className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4'>
-					Upload
-				</button>
-			</form>
+			<div className='admin-dashboard'>
+				<form
+					onSubmit={handleUpload}
+					className='flex flex-col items-center justify-center my-4 import '>
+					<h2 className='text-xl my-4'>Upload New Vendors Vendors</h2>
+					<input
+						type='file'
+						name='file'
+						onChange={handleFileChange}
+						className='border border-gray-300 rounded-md p-2'
+					/>
+					<button
+						type='submit'
+						disabled={isLoading}
+						className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4'>
+						Upload
+					</button>
+				</form>
+				{isSuccess && (
+					<div className='assign'>
+						<AdminVendorAssignmentsTable
+							vendorAssignments={vendorAssignments}
+						/>
+					</div>
+				)}
+				{error && <p>{error.message}</p>}
+				<div className='contribution'>
+					<ContributionForm />
+				</div>
+				<div className='registration'>
+					<RegistrationForm />
+				</div>
+			</div>
 		</div>
 	);
 };

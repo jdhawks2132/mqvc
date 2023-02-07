@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.admin-dashboard {
+	display: grid;
+	grid-template-columns: 1.3fr 1fr 1fr;
+	grid-template-rows: minmax(100px, auto);
+	grid-gap: 10px;
+	max-width: 100%;
+	grid-template-areas:
+		'import contribution registration'
+		'assign vendor_cont vendor_reg'
+		'assign vendor_cont vendor_reg';
+}
+
+.import {
+	grid-area: import;
+}
+
+.contribution {
+	grid-area: contribution;
+}
+
+.registration {
+	grid-area: registration;
+}
+
+.assign {
+	grid-area: assign;
+}
+
+.vendor_cont {
+	grid-area: vendor_cont;
+}
+
+.vendor_reg {
+	grid-area: vendor_reg;
+}

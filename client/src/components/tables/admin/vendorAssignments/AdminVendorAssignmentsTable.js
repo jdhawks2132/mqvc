@@ -49,7 +49,7 @@ const AdminVendorAssignmentsTable = ({ vendorAssignments }) => {
 	};
 
 	return (
-		<div className='mx-auto'>
+		<div className='mx-auto my-4'>
 			<h2 className='text-xl text-center my-4'>Vendor Assignments</h2>
 			<form onSubmit={handleSubmit}>
 				<table className='table-auto mx-auto'>

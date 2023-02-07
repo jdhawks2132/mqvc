@@ -194,6 +194,26 @@ export const mqvcAPI = createApi({
 			}),
 			invalidatesTags: ['Mailer', 'Vendor'],
 		}),
+		createContribution: builder.mutation({
+			query: (contribution) => ({
+				url: 'api/v1/contributions',
+				method: 'POST',
+				body: contribution,
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidatesTags: ['Contribution', 'Vendor'],
+		}),
+		createRegistration: builder.mutation({
+			query: (registration) => ({
+				url: 'api/v1/registrations',
+				method: 'POST',
+				body: registration,
+				credentials: 'include',
+				headers: { Authorization: localStorage.getItem('jwt') },
+			}),
+			invalidatesTags: ['Registration', 'Vendor'],
+		}),
 	}),
 });
 
@@ -222,4 +242,6 @@ export const {
 	useUpdateMailerMutation,
 	useDeleteMailerMutation,
 	useSendMassEmailMutation,
+	useCreateContributionMutation,
+	useCreateRegistrationMutation,
 } = mqvcAPI;
