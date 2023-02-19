@@ -1,6 +1,9 @@
 class Api::V1::VendorRegistrationsController < ApiController
   def index
-    render json: VendorRegistration.all, status: :ok
+    vendor_registrations =
+      VendorRegistration.all.order(year: :desc, vendor_id: :asc)
+
+    render json: vendor_registrations, status: :ok
   end
 
   def show
