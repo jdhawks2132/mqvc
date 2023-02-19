@@ -15,6 +15,7 @@ import CreateContact from './pages/create/CreateContact';
 import AdminDashboard from './pages/dashboard/AdminDashboard';
 import Mailers from './pages/mailers/Mailers';
 import MailerDetails from './pages/mailers/MailerDetails';
+import Registrations from './pages/dashboard/Registrations';
 
 function App() {
 	const [authIsReady, setAuthIsReady] = useState(false);
@@ -100,6 +101,10 @@ function App() {
 							<Route
 								path='/mailers'
 								element={isAdmin ? <Mailers /> : <Navigate to='/' />}
+							/>
+							<Route
+								path='/registrations'
+								element={isAdmin ? <Registrations /> : <Navigate to='/' />}
 							/>
 
 							{/* fallback route */}

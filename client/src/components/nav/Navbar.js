@@ -42,9 +42,9 @@ const Navbar = ({ currentUser }) => {
 					{currentUser ? (
 						<>
 							<Link
-								to='/contacts'
+								to='/registrations'
 								className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'>
-								Contacts (coming soon)
+								Registrations
 							</Link>
 							<Link
 								to='/mailers'

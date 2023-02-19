@@ -214,6 +214,10 @@ export const mqvcAPI = createApi({
 			}),
 			invalidatesTags: ['Registration', 'Vendor'],
 		}),
+		vendorRegistrations: builder.query({
+			query: () => `api/v1/vendor_registrations/`,
+			providesTags: ['Registration'],
+		}),
 	}),
 });
 
@@ -244,4 +248,5 @@ export const {
 	useSendMassEmailMutation,
 	useCreateContributionMutation,
 	useCreateRegistrationMutation,
+	useVendorRegistrationsQuery,
 } = mqvcAPI;
