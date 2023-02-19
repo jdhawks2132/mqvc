@@ -28,7 +28,7 @@ const Registrations = () => {
 		<div>
 			<h2 className='m-11 text-2xl'>Registrations</h2>
 			{isLoading && <p>Loading...</p>}
-			{isSuccess && (
+			{isSuccess && groupedYears.length > 0 ? (
 				<div>
 					{groupedYears.map((year) => (
 						<div key={year}>
@@ -56,6 +56,10 @@ const Registrations = () => {
 						</div>
 					))}
 				</div>
+			) : (
+				<h2 className='m-11 text-2xl'>
+					{data?.length > 0 ? 'No Matching Registrations' : 'No Registrations'}
+				</h2>
 			)}
 		</div>
 	);
